@@ -13,15 +13,23 @@ export const upsertFromClerk = internalMutation({
   args: { data: v.any() as Validator<UserJSON> }, // no runtime validation, trust Clerk
   async handler(ctx, { data }) {
     const userAttributes = {
-      name: `${data.first_name} ${data.last_name}`,
+      name: `${data.first_name || ''} ${data.last_name || ''}`.trim(),
       externalId: data.id,
+      imageUrl: data.image_url,
+      subscriptionTier: "free" as const,
+      joinedAt: Date.now(),
+      lastActive: Date.now(),
     };
 
     const user = await userByExternalId(ctx, data.id);
     if (user === null) {
       await ctx.db.insert("users", userAttributes);
     } else {
-      await ctx.db.patch(user._id, userAttributes);
+      await ctx.db.patch(user._id, {
+        name: userAttributes.name,
+        imageUrl: userAttributes.imageUrl,
+        lastActive: Date.now(),
+      });
     }
   },
 });

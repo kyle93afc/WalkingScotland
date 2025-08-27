@@ -13,10 +13,17 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as files from "../files.js";
 import type * as http from "../http.js";
+import type * as likes from "../likes.js";
 import type * as paymentAttemptTypes from "../paymentAttemptTypes.js";
 import type * as paymentAttempts from "../paymentAttempts.js";
+import type * as regions from "../regions.js";
+import type * as seed_new from "../seed-new.js";
+import type * as seed from "../seed.js";
 import type * as users from "../users.js";
+import type * as walkReports from "../walkReports.js";
+import type * as walks from "../walks.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -27,10 +34,17 @@ import type * as users from "../users.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  files: typeof files;
   http: typeof http;
+  likes: typeof likes;
   paymentAttemptTypes: typeof paymentAttemptTypes;
   paymentAttempts: typeof paymentAttempts;
+  regions: typeof regions;
+  "seed-new": typeof seed_new;
+  seed: typeof seed;
   users: typeof users;
+  walkReports: typeof walkReports;
+  walks: typeof walks;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
