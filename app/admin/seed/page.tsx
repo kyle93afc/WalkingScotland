@@ -17,8 +17,11 @@ export default function SeedPage() {
   const { isSignedIn } = useAuth();
   const seedAll = useMutation(api.seed.seedAll);
   const seedRegions = useMutation(api.seed.seedRegions);
-  const seedWalkHighlandsRegions = useMutation(api.seedNew.seedWalkHighlandsRegions);
+  const seedWalkHighlandsRegions = useMutation(api.seed_new.seedWalkHighlandsRegions);
   const seedWalks = useMutation(api.seed.seedWalks);
+  const seedScrapedWalks = useMutation(api.seed.seedScrapedWalks);
+  const seedDetailedWalks = useMutation(api.seed.seedDetailedWalks);
+  const seedAll90Walks = useMutation(api.seed.seedAll90Walks);
 
   const handleSeedAll = async () => {
     if (!isSignedIn) {
@@ -100,6 +103,58 @@ export default function SeedPage() {
     }
   };
 
+  const handleSeedScrapedWalks = async () => {
+    if (!isSignedIn) {
+      setError('Please sign in to run seeding');
+      return;
+    }
+
+    setIsSeeding(true);
+    setError(null);
+
+    try {
+      const result = await seedScrapedWalks();
+      setResults(result);
+    } catch (err: any) {
+      setError(err.message || 'Scraped walks seeding failed');
+    } finally {
+      setIsSeeding(false);
+    }
+  };
+
+  const handleSeedDetailedWalks = async () => {
+    if (!isSignedIn) {
+      setError('Please sign in to run seeding');
+      return;
+    }
+
+    setIsSeeding(true);
+    setError(null);
+
+    try {
+      const result = await seedDetailedWalks();
+      setResults(result);
+    } catch (err: any) {
+      setError(err.message || 'Detailed walks seeding failed');
+    } finally {
+      setIsSeeding(false);
+    }
+  };
+
+  const handleSeedAll90Walks = async () => {
+    setIsSeeding(true);
+    setError(null);
+
+    try {
+      const result = await seedAll90Walks();
+      setResults(result);
+    } catch (err: any) {
+      setError(err.message || 'All 90 walks seeding failed');
+    } finally {
+      setIsSeeding(false);
+    }
+  };
+
   if (!isSignedIn) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
@@ -163,6 +218,165 @@ export default function SeedPage() {
                   <Play className="size-4 mr-2" />
                 )}
                 {isSeeding ? 'Seeding...' : 'Seed Walk Highlands Regions'}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Scraped Popular Walks */}
+          <Card className="col-span-full">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="size-5 text-purple-600" />
+                Popular Scottish Walks (NEW!)
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Add 11 carefully curated popular Scottish walks with original descriptions inspired by real WalkHighlands routes. Perfect for Phase 1 launch with diverse difficulty levels and stunning locations.
+              </p>
+              
+              <div className="space-y-2">
+                <Badge variant="outline">11 Popular Walks</Badge>
+                <Badge variant="outline">Original Descriptions</Badge>
+                <Badge variant="outline">8 Regions Covered</Badge>
+                <Badge variant="outline">Easy to Moderate</Badge>
+              </div>
+
+              <Button 
+                onClick={handleSeedScrapedWalks}
+                disabled={isSeeding}
+                className="w-full bg-purple-600 hover:bg-purple-700"
+                size="lg"
+              >
+                {isSeeding ? (
+                  <Loader2 className="size-4 mr-2 animate-spin" />
+                ) : (
+                  <Play className="size-4 mr-2" />
+                )}
+                {isSeeding ? 'Seeding...' : 'Add Popular Walks'}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Detailed Walks with Stages */}
+          <Card className="col-span-full">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="size-5 text-blue-600" />
+                Detailed Walks with Stage Navigation (PREMIUM!)
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Add premium walks with detailed stage-by-stage navigation inspired by WalkHighlands. Each walk includes 6+ detailed stages with turn-by-turn directions, making them perfect for serious walkers and premium content.
+              </p>
+              
+              <div className="space-y-2">
+                <Badge variant="outline">3 Premium Walks</Badge>
+                <Badge variant="outline">18 Navigation Stages</Badge>
+                <Badge variant="outline">Original Stage Descriptions</Badge>
+                <Badge variant="outline">Skye + Cairngorms</Badge>
+                <Badge className="bg-blue-100 text-blue-800">Stage-by-Stage Navigation</Badge>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-1">
+                  Premium Features:
+                </p>
+                <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+                  <li>• Detailed turn-by-turn navigation for each stage</li>
+                  <li>• GPS coordinates and grid references</li>
+                  <li>• Terrain descriptions and safety information</li>
+                  <li>• Original content inspired by WalkHighlands expertise</li>
+                </ul>
+              </div>
+
+              <Button 
+                onClick={handleSeedDetailedWalks}
+                disabled={isSeeding}
+                className="w-full bg-blue-600 hover:bg-blue-700"
+                size="lg"
+              >
+                {isSeeding ? (
+                  <Loader2 className="size-4 mr-2 animate-spin" />
+                ) : (
+                  <Play className="size-4 mr-2" />
+                )}
+                {isSeeding ? 'Seeding...' : 'Add Detailed Navigation Walks'}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* All 90 Walks Bulk Import */}
+          <Card className="col-span-full">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="size-5 text-emerald-600" />
+                Import All 90 Walks - COMPLETE COLLECTION 🚀
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Import the complete collection of 90 converted walks with detailed stage-by-stage navigation. This includes all scraped walks from across Scotland, each with original descriptions and turn-by-turn directions.
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                <Badge variant="outline" className="text-center">90 Total Walks</Badge>
+                <Badge variant="outline" className="text-center">~460 Navigation Stages</Badge>
+                <Badge variant="outline" className="text-center">7 Scottish Regions</Badge>
+                <Badge variant="outline" className="text-center">Original Descriptions</Badge>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg p-3">
+                  <p className="text-sm text-emerald-800 dark:text-emerald-200 font-medium mb-1">
+                    Regional Coverage:
+                  </p>
+                  <ul className="text-xs text-emerald-700 dark:text-emerald-300 space-y-1">
+                    <li>• Isle of Skye: 10 mystical walks</li>
+                    <li>• Cairngorms-Aviemore: 15 forest trails</li>
+                    <li>• Torridon-Gairloch: 14 Highland walks</li>
+                    <li>• Loch Lomond: 15 loch circuits</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                  <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-1">
+                    Premium Features:
+                  </p>
+                  <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+                    <li>• 5.1 average stages per walk</li>
+                    <li>• GPS coordinates & OS grid refs</li>
+                    <li>• Terrain & safety information</li>
+                    <li>• Copyright-free original content</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3">
+                <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium mb-1">
+                  ⚠️ This is a bulk import operation:
+                </p>
+                <ul className="text-xs text-yellow-700 dark:text-yellow-300 space-y-1">
+                  <li>• Will create 90 walks + ~460 stage records</li>
+                  <li>• May take 2-3 minutes to complete</li>
+                  <li>• Skips walks that already exist</li>
+                  <li>• Updates region walk counts automatically</li>
+                </ul>
+              </div>
+
+              <Button 
+                onClick={handleSeedAll90Walks}
+                disabled={isSeeding}
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                size="lg"
+              >
+                {isSeeding ? (
+                  <Loader2 className="size-4 mr-2 animate-spin" />
+                ) : (
+                  <Database className="size-4 mr-2" />
+                )}
+                {isSeeding ? 'Importing All 90 Walks...' : 'Import Complete 90-Walk Collection'}
               </Button>
             </CardContent>
           </Card>
@@ -253,6 +467,34 @@ export default function SeedPage() {
                   )}
                   Seed Walks Only
                 </Button>
+
+                <Button 
+                  onClick={handleSeedScrapedWalks}
+                  disabled={isSeeding}
+                  variant="default"
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                >
+                  {isSeeding ? (
+                    <Loader2 className="size-4 mr-2 animate-spin" />
+                  ) : (
+                    <Database className="size-4 mr-2" />
+                  )}
+                  Popular Walks
+                </Button>
+
+                <Button 
+                  onClick={handleSeedDetailedWalks}
+                  disabled={isSeeding}
+                  variant="default"
+                  className="w-full bg-blue-600 hover:bg-blue-700"
+                >
+                  {isSeeding ? (
+                    <Loader2 className="size-4 mr-2 animate-spin" />
+                  ) : (
+                    <Database className="size-4 mr-2" />
+                  )}
+                  Detailed Navigation
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -311,11 +553,17 @@ export default function SeedPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <h4 className="font-medium">Regions Created (31 total):</h4>
+              <h4 className="font-medium">Walk Highlands Regions (26 authentic regions):</h4>
               <ul className="text-sm text-muted-foreground space-y-1 ml-4">
-                <li>• <strong>Highlands:</strong> Sutherland & Caithness, Ullapool & Assynt, Torridon & Gairloch, Kintail & Lochalsh, Loch Ness & Affric, Moray, Fort William, Cairngorms & Aviemore, Perthshire, Argyll & Oban, Loch Lomond, Aberdeenshire, Angus</li>
-                <li>• <strong>Islands:</strong> Isle of Skye, Isle of Mull, Outer Hebrides, Isle of Arran, Coll/Tiree & Small Isles, Islay/Jura & Colonsay, Orkney, Shetland, Isle of Bute, Isle of Gigha, Isle of Lismore, Isle of Raasay, Isle of Ulva</li>
-                <li>• <strong>Lowlands:</strong> Fife & Stirling, Edinburgh & Lothian, Glasgow & Ayrshire, Dumfries & Galloway, Scottish Borders</li>
+                <li>• <strong>Northern Scotland:</strong> Sutherland & Caithness, Ullapool/Assynt/E Ross, Torridon and Gairloch, Loch Ness and Affric, Kintail and Lochalsh</li>
+                <li>• <strong>Northeast:</strong> Moray and Nairn, Aberdeenshire</li>
+                <li>• <strong>Highlands:</strong> Fort William, Cairngorms and Aviemore, Perthshire</li>
+                <li>• <strong>West Coast:</strong> Argyll/Oban & Bute, Loch Lomond & Trossachs</li>
+                <li>• <strong>East Central:</strong> Angus, Fife and Stirling</li>
+                <li>• <strong>Southwest:</strong> Glasgow/Ayrshire/Lanark, Edinburgh and Lothian, Dumfries and Galloway</li>
+                <li>• <strong>Southern:</strong> Borders</li>
+                <li>• <strong>Inner Hebrides:</strong> Isle of Skye (& Raasay), Isle of Mull (& Ulva/Iona), Isle of Arran, Small Isles/Coll/Tiree, Islay/Jura & Colonsay</li>
+                <li>• <strong>Other Islands:</strong> Outer Hebrides, Orkney, Shetland</li>
               </ul>
             </div>
 

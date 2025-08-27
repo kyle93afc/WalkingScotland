@@ -11,69 +11,11 @@ import { MapPin, Clock, TrendingUp, Star, Users, Search, Filter, Grid, List } fr
 import Link from 'next/link';
 import Image from 'next/image';
 import RegionMap from '@/components/map/RegionMap';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
-// Mock data - will be replaced with Convex queries
-const mockWalks = [
-  {
-    _id: '1',
-    title: 'Ben Nevis via Tourist Path',
-    slug: 'ben-nevis-tourist-path',
-    region: { name: 'Highlands', slug: 'highlands' },
-    difficulty: 'Strenuous' as const,
-    distance: 17.2,
-    estimatedTime: 8,
-    ascent: 1352,
-    latitude: 56.7969,
-    longitude: -5.0036,
-    rating: 4.7,
-    reviewCount: 284,
-    featuredImageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop',
-    shortDescription: 'Scotland\'s highest mountain offering spectacular views from the summit.',
-    tags: ['munro', 'iconic', 'challenging'],
-    viewCount: 15234,
-    recentActivity: 12
-  },
-  {
-    _id: '2',
-    title: 'Old Man of Storr Circuit',
-    slug: 'old-man-of-storr-circuit',
-    region: { name: 'Isle of Skye', slug: 'skye' },
-    difficulty: 'Moderate' as const,
-    distance: 3.8,
-    estimatedTime: 2.5,
-    ascent: 430,
-    latitude: 57.5067,
-    longitude: -6.1803,
-    rating: 4.8,
-    reviewCount: 156,
-    featuredImageUrl: 'https://images.unsplash.com/photo-1573160103600-4c2b8c2b49c9?w=800&h=600&fit=crop',
-    shortDescription: 'Iconic rock formations with otherworldly landscapes on the Isle of Skye.',
-    tags: ['iconic', 'photography', 'family-friendly'],
-    viewCount: 9876,
-    recentActivity: 8
-  },
-  {
-    _id: '3',
-    title: 'Loch Katrine Circuit',
-    slug: 'loch-katrine-circuit',
-    region: { name: 'Trossachs', slug: 'trossachs' },
-    difficulty: 'Easy' as const,
-    distance: 12.5,
-    estimatedTime: 4,
-    ascent: 125,
-    latitude: 56.2667,
-    longitude: -4.5833,
-    rating: 4.5,
-    reviewCount: 89,
-    featuredImageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-    shortDescription: 'Peaceful loch-side walk through pristine Scottish wilderness.',
-    tags: ['family-friendly', 'water', 'wildlife'],
-    viewCount: 5643,
-    recentActivity: 5
-  }
-];
 
-const difficultyColors = {
+const difficultyColors: Record<string, string> = {
   'Easy': 'bg-emerald-100 text-emerald-700 border-emerald-200',
   'Moderate': 'bg-amber-100 text-amber-700 border-amber-200',
   'Hard': 'bg-red-100 text-red-700 border-red-200',
@@ -87,16 +29,22 @@ export default function WalkDiscovery() {
   const [sortBy, setSortBy] = useState('popularity');
   const [viewMode, setViewMode] = useState<'grid' | 'list' | 'map'>('grid');
 
+  // Fetch all walks from Convex
+  const walks = useQuery(api.walks.getPublishedWalks, { limit: 100 });
+  const regions = useQuery(api.regions.getAllRegions);
+
   // Filter and sort walks
   const filteredWalks = useMemo(() => {
-    let filtered = mockWalks.filter(walk => {
+    if (!walks) return [];
+    
+    let filtered = walks.filter(walk => {
       const matchesSearch = !searchTerm || 
         walk.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         walk.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
         walk.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       
       const matchesDifficulty = selectedDifficulty === 'all' || walk.difficulty === selectedDifficulty;
-      const matchesRegion = selectedRegion === 'all' || walk.region.slug === selectedRegion;
+      const matchesRegion = selectedRegion === 'all' || walk.region?.slug === selectedRegion;
 
       return matchesSearch && matchesDifficulty && matchesRegion;
     });
@@ -107,7 +55,7 @@ export default function WalkDiscovery() {
         case 'popularity':
           return b.viewCount - a.viewCount;
         case 'rating':
-          return b.rating - a.rating;
+          return b.averageRating - a.averageRating;
         case 'distance':
           return a.distance - b.distance;
         case 'difficulty':
@@ -119,7 +67,7 @@ export default function WalkDiscovery() {
     });
 
     return filtered;
-  }, [searchTerm, selectedDifficulty, selectedRegion, sortBy]);
+  }, [walks, searchTerm, selectedDifficulty, selectedRegion, sortBy]);
 
   // Calculate map center based on filtered walks
   const mapCenter = useMemo((): [number, number] => {
@@ -131,7 +79,7 @@ export default function WalkDiscovery() {
     return [avgLng, avgLat];
   }, [filteredWalks]);
 
-  const WalkCard = ({ walk, isListView = false }: { walk: typeof mockWalks[0], isListView?: boolean }) => (
+  const WalkCard = ({ walk, isListView = false }: { walk: any, isListView?: boolean }) => (
     <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden border-0 bg-white dark:bg-gray-800">
       <div className={`${isListView ? 'flex' : ''}`}>
         {/* Image */}
@@ -153,11 +101,11 @@ export default function WalkDiscovery() {
           </Badge>
 
           {/* Live activity indicator */}
-          {walk.recentActivity > 0 && (
+          {walk.viewCount > 1000 && (
             <div className="absolute top-3 right-3 flex items-center gap-1 bg-white dark:bg-gray-800 rounded-full px-2 py-1 text-xs font-medium">
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
               <Users className="size-3" />
-              <span>{walk.recentActivity}</span>
+              <span>{Math.floor(walk.viewCount / 100)}</span>
             </div>
           )}
         </div>
@@ -172,7 +120,7 @@ export default function WalkDiscovery() {
             </Link>
             <div className="flex items-center gap-1 mt-1 text-sm text-muted-foreground">
               <MapPin className="size-3" />
-              <span>{walk.region.name}</span>
+              <span>{walk.region?.name || 'Unknown Region'}</span>
             </div>
           </div>
 
@@ -201,7 +149,7 @@ export default function WalkDiscovery() {
                 </div>
                 <div className="flex items-center gap-1">
                   <Star className="size-3 fill-yellow-400 text-yellow-400" />
-                  <span className="font-medium">{walk.rating}</span>
+                  <span className="font-medium">{walk.averageRating || 0}</span>
                 </div>
               </>
             )}
@@ -212,16 +160,16 @@ export default function WalkDiscovery() {
             {!isListView && (
               <div className="flex items-center gap-1">
                 <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                <span className="font-medium text-sm">{walk.rating}</span>
+                <span className="font-medium text-sm">{walk.averageRating || 0}</span>
                 <span className="text-xs text-muted-foreground">
-                  ({walk.reviewCount})
+                  ({walk.reportCount || 0})
                 </span>
               </div>
             )}
 
             {/* Tags */}
             <div className="flex gap-1">
-              {walk.tags.slice(0, isListView ? 3 : 2).map((tag) => (
+              {walk.tags.slice(0, isListView ? 3 : 2).map((tag: string) => (
                 <Badge key={tag} variant="outline" className="text-xs px-2 py-0">
                   {tag}
                 </Badge>
@@ -283,9 +231,11 @@ export default function WalkDiscovery() {
                 className="px-3 py-2 border border-gray-200 rounded-md text-sm"
               >
                 <option value="all">All Regions</option>
-                <option value="highlands">Highlands</option>
-                <option value="skye">Isle of Skye</option>
-                <option value="trossachs">Trossachs</option>
+                {regions?.map((region) => (
+                  <option key={region._id} value={region.slug}>
+                    {region.name}
+                  </option>
+                ))}
               </select>
 
               <select

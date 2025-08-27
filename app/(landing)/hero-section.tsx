@@ -2,14 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { HeroHeader } from "./header"
 import { MapPin, Mountain, Users } from 'lucide-react'
 
 export default function HeroSection() {
     return (
-        <>
-            <HeroHeader />
-            <main>
+        <main>
                 <section className="relative overflow-hidden">
                     {/* Background gradient */}
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-emerald-950 dark:via-gray-900 dark:to-blue-950"></div>
@@ -121,7 +118,6 @@ export default function HeroSection() {
                         </div>
                     </div>
                 </section>
-            </main>
-        </>
+        </main>
     )
 }

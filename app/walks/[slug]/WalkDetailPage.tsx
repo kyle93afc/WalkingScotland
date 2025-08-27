@@ -121,14 +121,37 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
   const [activeTab, setActiveTab] = useState('overview');
   const [liked, setLiked] = useState(false);
 
-  // In a real app, these would use Convex queries
-  // const walk = useQuery(api.walks.getWalkBySlug, { slug });
-  // const reports = useQuery(api.walkReports.getReportsByWalk, { walkId: walk?._id });
+  // Get real data from Convex
+  const walk = useQuery(api.walks.getWalkBySlug, { slug });
+  const walkStages = useQuery(api.walkStages.getStagesByWalkId, 
+    walk ? { walkId: walk._id } : "skip"
+  );
+  const reports = useQuery(api.walkReports.getReportsByWalk,
+    walk ? { walkId: walk._id, limit: 10 } : "skip"
+  );
   
-  const walk = mockWalk; // Using mock data for now
-  const reports = mockReports;
+  // Use mock reports as fallback if no real reports exist
+  const displayReports = reports && reports.length > 0 ? reports : mockReports;
 
-  if (!walk) {
+  // Show loading state while data is being fetched
+  if (walk === undefined) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="relative h-[60vh] min-h-[400px] bg-gray-200 dark:bg-gray-700 animate-pulse" />
+        <div className="mx-auto max-w-4xl p-6 -mt-32 relative z-10">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+            <div className="space-y-4">
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 animate-pulse" />
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 animate-pulse" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (walk === null) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
@@ -199,7 +222,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
             <div className="flex items-center gap-4 text-lg">
               <div className="flex items-center gap-1">
                 <MapPin className="size-5" />
-                <span>{walk.region.name}</span>
+                <span>{walk.region?.name || 'Unknown Region'}</span>
               </div>
               <div className="flex items-center gap-1">
                 <Star className="size-5 fill-yellow-400 text-yellow-400" />
@@ -231,7 +254,9 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
               <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="map">Map</TabsTrigger>
-                <TabsTrigger value="reports">Reports ({walk.reportCount})</TabsTrigger>
+                <TabsTrigger value="reports">
+                  Reports ({reports && reports.length > 0 ? reports.length : walk.reportCount})
+                </TabsTrigger>
                 <TabsTrigger value="photos">Photos</TabsTrigger>
               </TabsList>
 
@@ -288,6 +313,46 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Route Directions - Real walk stages */}
+                {walkStages && walkStages.length > 0 && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Route Directions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {walkStages.map((stage, index) => (
+                          <div key={stage._id} className="border-l-4 border-emerald-500 pl-4">
+                            <div className="flex items-start gap-3">
+                              <div className="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                                {stage.stageNumber}
+                              </div>
+                              <div className="flex-1">
+                                {stage.title && (
+                                  <h4 className="font-semibold text-base mb-1">{stage.title}</h4>
+                                )}
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                  {stage.description}
+                                </p>
+                                {(stage.distance || stage.duration) && (
+                                  <div className="flex gap-4 mt-2 text-xs text-muted-foreground">
+                                    {stage.distance && (
+                                      <span>📏 {stage.distance}km</span>
+                                    )}
+                                    {stage.duration && (
+                                      <span>⏱️ {Math.round(stage.duration / 60)}min</span>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
               </TabsContent>
 
               <TabsContent value="map">
@@ -305,13 +370,26 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
               </TabsContent>
 
               <TabsContent value="reports" className="space-y-4">
-                {reports.map((report) => (
+                {!reports || reports.length === 0 ? (
+                  <Card className="border-dashed">
+                    <CardContent className="p-6 text-center">
+                      <MessageCircle className="size-8 text-gray-400 mx-auto mb-3" />
+                      <h3 className="font-medium text-gray-900 dark:text-white mb-2">No walk reports yet</h3>
+                      <p className="text-sm text-muted-foreground mb-4">
+                        Be the first to share your experience of this walk! 
+                        The reviews below are demo data for preview.
+                      </p>
+                    </CardContent>
+                  </Card>
+                ) : null}
+                
+                {displayReports.map((report) => (
                   <Card key={report._id}>
                     <CardHeader>
                       <div className="flex items-start gap-4">
                         <Avatar>
-                          <AvatarImage src={report.author.imageUrl} alt={report.author.name} />
-                          <AvatarFallback>{report.author.name.charAt(0)}</AvatarFallback>
+                          <AvatarImage src={report.author?.imageUrl} alt={report.author?.name || 'Author'} />
+                          <AvatarFallback>{report.author?.name?.charAt(0) || 'A'}</AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
@@ -330,7 +408,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                             </div>
                           </div>
                           <div className="text-sm text-muted-foreground">
-                            by {report.author.name} • {formatDate(report.completedAt)}
+                            by {report.author?.name || 'Anonymous'} • {formatDate(report.completedAt)}
                           </div>
                         </div>
                       </div>

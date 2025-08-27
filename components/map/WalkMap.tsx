@@ -54,14 +54,20 @@ export default function WalkMap({
     // Add fullscreen control
     map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
-    // Add terrain control for 3D view (premium feature)
-    map.current.addControl(
-      new mapboxgl.TerrainControl({
-        source: 'mapbox-dem',
-        exaggeration: 1.5,
-      }),
-      'top-right'
-    );
+    // Add terrain control for 3D view (premium feature - optional)
+    try {
+      if ((mapboxgl as any).TerrainControl) {
+        map.current.addControl(
+          new (mapboxgl as any).TerrainControl({
+            source: 'mapbox-dem',
+            exaggeration: 1.5,
+          }),
+          'top-right'
+        );
+      }
+    } catch (error) {
+      console.warn('TerrainControl not available - requires Mapbox premium subscription');
+    }
 
     // Add marker for walk start point
     new mapboxgl.Marker({
@@ -78,27 +84,33 @@ export default function WalkMap({
     map.current.on('load', () => {
       setIsLoaded(true);
 
-      // Add terrain data source
-      map.current!.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-        tileSize: 512,
-        maxzoom: 14,
-      });
+      // Add terrain data source and terrain (premium features - optional)
+      try {
+        if ((mapboxgl as any).TerrainControl) {
+          map.current!.addSource('mapbox-dem', {
+            type: 'raster-dem',
+            url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            tileSize: 512,
+            maxzoom: 14,
+          });
 
-      // Set terrain
-      map.current!.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+          // Set terrain
+          map.current!.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
 
-      // Add sky layer for dramatic effect
-      map.current!.addLayer({
-        id: 'sky',
-        type: 'sky',
-        paint: {
-          'sky-type': 'atmosphere',
-          'sky-atmosphere-sun': [0.0, 0.0],
-          'sky-atmosphere-sun-intensity': 15,
-        },
-      });
+          // Add sky layer for dramatic effect
+          map.current!.addLayer({
+            id: 'sky',
+            type: 'sky',
+            paint: {
+              'sky-type': 'atmosphere',
+              'sky-atmosphere-sun': [0.0, 0.0],
+              'sky-atmosphere-sun-intensity': 15,
+            },
+          });
+        }
+      } catch (error) {
+        console.warn('Terrain features not available - requires Mapbox premium subscription');
+      }
     });
 
     return () => {

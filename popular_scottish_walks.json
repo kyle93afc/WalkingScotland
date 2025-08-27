@@ -1,0 +1,1202 @@
+[
+  {
+    "title": "The Fairy Glen, near Uig",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/fairyglen.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Coille Iòsal, Braes",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/skye/braes.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Dùn Scaith Castle, Tokavaig",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 40,
+    "source_url": "https://www.walkhighlands.co.uk/skye/dunscaith.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Kylerhea Otter Hide trail",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/kylerheaotter.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Scorrybreac circuit, Portree",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/scorrybreac.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Neist Point",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/neistpoint.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Dunvegan Two Churches Walk, Dunvegan",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/skye/twochurches.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Dùn Ringill, Kilmarie",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/dunringill.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Cnoc a'Mhadaidh Ruaidh, Kyleakin",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/cnoc-a-mhadaidh-ruaidh.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Bearreraig Bay",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.25,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/skye/beareraigbay.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Talisker Bay",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/taliskerbay.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Rubh an Eireannaich, Broadford",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/irishmanspoint.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Caisteal Maol and Kyleakin",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/caistealmaol.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Staffin slipway and An Corran beach circuit",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/staffin.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Coral Beaches, Claigan near Dunvegan",
+    "region": "Skye",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/skye/coralbeaches.shtml",
+    "description": "A easy walk in Skye"
+  },
+  {
+    "title": "Sailean nan Cuileag, Sunart Oakwoods",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 0.75,
+    "duration_minutes": 30,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/saileannancuileag.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Daingean Trail, Glengarry",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 0.75,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/daingean.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Salen Oakwoods",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/salen.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Àrd Airigh and Garbh Eilean hide, Sunart Oakwoods",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/ardairigh.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Allt Muick butterfly reserve, Loch Arkaig",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/allt-muick.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Ballachulish Slate Quarries and Loch Leven",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/ballachulish.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Signal Rock and An Torr, Glencoe",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/signalrock.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Glencoe Lochan trails",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/glencoelochan.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Allt Dubh and Alderwood trails, Creag Meagaidh NNR",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/aberarder.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Glenborrodale RSPB reserve",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/glenborrodale.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Brecklet Trail, Ballachulish",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/brecklet.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Ciste Dubh Trail, near Invergarry",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/gleannlaogh.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Aoineadh Mòr Cleared Village, Morvern",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/inniemore.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "River Lundie walk, Leanachan Forest",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/leanachan-forest.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "The Lower Falls and Achriabhach Forest, Glen Nevis",
+    "region": "Fortwilliam",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/fortwilliam/achriabhach.shtml",
+    "description": "A easy walk in Fortwilliam"
+  },
+  {
+    "title": "Woodland Trail, Beinn Eighe NNR",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Woodlandtrail.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Torridon Trail - boathouse walk",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Lochtorridon.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Buzzard Path, Beinn Eighe visitor centre",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.5,
+    "duration_minutes": 1800,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Talkingtrail.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Cuaig Beach",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Cuaig.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Laide Wood, near Aultbea",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/laide-wood.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Gruinard Bay and the Eas Dubh falls",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/gruinardbay.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Gairloch Beach and Pier",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/gairloch-beach.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Applecross and Milltown circuit",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/milton-applecross.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Applecross House and Walled Garden circuit",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.1,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Applecrosshouse.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Flowerdale Glen, Gairloch",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.75,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Flowerdale.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Lochcarron Coffin Road circuit",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 5.0,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/lochcarron-coffin-road.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Torridon village walk, Torridon",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 6.1,
+    "duration_minutes": 120,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/torridon-village.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Coral Beaches, near Culduie",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 6.3,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Coralbeach.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Sand River circuit, Big Sand",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 6.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/sand-river.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Sand to Applecross Bay",
+    "region": "Torridon",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 7.0,
+    "duration_minutes": 120,
+    "source_url": "https://www.walkhighlands.co.uk/torridon/Sandapplecross.shtml",
+    "description": "A easy walk in Torridon"
+  },
+  {
+    "title": "Gynack Mill Trail, Kingussie",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.3,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/gynack-mill.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Riverside Walk, Kincraig",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.7,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/kincraig.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Nethy Bridge riverside and Dell woods",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/nethybridge.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "River Spey & old railway, by Grantown-on-Spey",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/river-spey-grantown.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Linn of Dee circuit, Linn of Dee, near Braemar",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/linn-of-dee.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Loch Vaa, near Aviemore",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/loch-vaa.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Cambus o' May Pinewood trail",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/pinewood-trail.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Druim an Aird, near Laggan",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/pattack.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Falls of Pattack",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/falls-of-pattack.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Insh Marshes - Invertromie Trail",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 120,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/inshmarshes.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Frank Bruce Sculpture Trail & Lower Feshie",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/lower-feshie.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Ellan Wood and the river, Carrbridge",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/ellan-woods.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Queen's Drive and River Clunie, Braemar",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/queens-drive.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "The Colonel's Bed, Inverey",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.9,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/colonels-bed.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Fairy Pool and Riverside walk, Glen Tanar",
+    "region": "Cairngorms",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.9,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/cairngorms/glen-tanar-riverside.shtml",
+    "description": "A easy walk in Cairngorms"
+  },
+  {
+    "title": "Falls of Falloch",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 0.6,
+    "duration_minutes": 20,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/falls-of-falloch.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Flanders Moss National Nature Reserve, near Kippen",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 0.9,
+    "duration_minutes": 30,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/flanders-moss.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Loch Lomond Shores walk, Balloch",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.0,
+    "duration_minutes": 30,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/lomond-shores.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Duncryne hill, by Gartocharn",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.25,
+    "duration_minutes": 40,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/duncryne.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Mountain lookout trail, Crianlarich",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/crianlarich.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Tarbet Isle Walk, near Tarbet",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/tarbet-isle.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Balmaha Millennium Forest path",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/balmaha.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Arrochar - Tarbet link path",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/arrochar-tarbet.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Luss Heritage Trail",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/luss.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Inversnaid RSPB nature trail",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/inversnaid.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Creag an Tuirc, Balquhidder",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/creag-an-tuirc.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Inchcailloch island",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/inchcailloch.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Ardess History Trail",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/ardess.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Strathyre circuit",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/strathyre.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Ardmore Point, near Helensburgh",
+    "region": "Lochlomond",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.25,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/lochlomond/ardmore-point.shtml",
+    "description": "A easy walk in Lochlomond"
+  },
+  {
+    "title": "Glasdrum Wood, Loch Creran",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/glasdrum.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Moine Mhòr and Dunadd",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.2,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/moine-mhor.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Achnabreac Cup and Ring carvings, Cairnbaan",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.75,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/achnabreck.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "River Lochy Falls & Strone Woods, Glen Lochy",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/strone-woods.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Kilchurn Castle, Loch Awe",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 40,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/kilchurn-castle.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Arichonan Clearance Village",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/arichonan.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Big Tree walk, Black Gates",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/big-trees.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Easdale explorer, Isle of Easdale",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/easdale.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Port Appin circuit",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/portappin.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Barnluasgan Oakwood, Beaver trial site",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/barnluasgan.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Puck's Glen",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/pucks-glen.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Torinturk and Dùn a'Choin Dhuibh",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/torinturk.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Sutherland's Grove forest walks, Barcaldine",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.7,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/glen-dubh.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Gleneck Viewpoints walk, Glenbranter",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/gleneck.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Stonefield Castle and Barmore Island",
+    "region": "Argyll",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/argyll/stonefield-castle.shtml",
+    "description": "A easy walk in Argyll"
+  },
+  {
+    "title": "Rhue Lighthouse, near Ullapool",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.2,
+    "duration_minutes": 20,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/rhue.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Lael Forest Garden and forest walk",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/lael.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Knockan Crag trail",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/knockancrag.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Nigg Church and the Bishops' walk",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/nigg-bishops.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Tain Hill and Pulpit Rock",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.0,
+    "duration_minutes": 40,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/tain-hill.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Clashnessie Bay and Falls",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.25,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/clashnessie-beach.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Leitir Easaidh all-abilities path, Little Assynt",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/leitir-easaidh.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Culag Woods, Lochinver",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/culag-woods.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Clachtoll Beach and the Broch",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/clachtoll-beach.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Tobar na Slainte, Shandwick",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/tobar-na-slainte.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Aldie Burn, near Tain",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/aldie-burn.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Lochanan nan Tunag, Kildary",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.25,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/kildary.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Corrieshalloch Gorge, Braemore Junction",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 45,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/corrieshalloch.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Tain links circuit",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/tain-links.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Uamh an Tartair, Knockan, Elphin",
+    "region": "Ullapool",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.75,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/ullapool/uamh-an-tartair.shtml",
+    "description": "A easy walk in Ullapool"
+  },
+  {
+    "title": "Weem Forest Trail, Weem by Aberfeldy",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 1.7,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/weem-wood.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Edramucky Trail, Ben Lawers",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.2,
+    "duration_minutes": 2700,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/lawers-nature-trail.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "The Falls of Bruar, near Blair Atholl",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 2.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/falls-of-bruar.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "The Birks of Aberfeldy, Aberfeldy",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/birks-of-aberfeldy.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Den of Alyth, Alyth",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 3.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/den-of-alyth.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Kinloch Rannoch Nature Trail",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/kinloch-rannoch.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Allean Forest trail, near Queen's View",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.0,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/queens-view.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Loch Tay from Killin",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.3,
+    "duration_minutes": 75,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/loch-tay-walk.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Logierait Woods, near Ballinluig",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/logierait-woods.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Innerwick and Bridge of Balgie, Glen Lyon",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/bridge-of-balgie.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Auchmore Circuit, Killin",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.5,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/auchmore-circuit.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Abernethy Glen and Castle Law, Abernethy",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.6,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/abernethy-glen.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "The Hosh circuit, Crieff",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.7,
+    "duration_minutes": 60,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/the-hosh.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "The Dùn, Aberfeldy",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 4.75,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/the-dun.shtml",
+    "description": "A easy walk in Perthshire"
+  },
+  {
+    "title": "Black Spout and Edradour, Pitlochry",
+    "region": "Perthshire",
+    "difficulty": "Easy",
+    "difficulty_level": 1,
+    "distance_km": 5.0,
+    "duration_minutes": 90,
+    "source_url": "https://www.walkhighlands.co.uk/perthshire/edradour.shtml",
+    "description": "A easy walk in Perthshire"
+  }
+]

@@ -54,6 +54,14 @@ export default defineSchema({
       likeCount: v.number(),
       reportCount: v.number(),
       averageRating: v.number(),
+      // Enhanced fields for detailed walks
+      terrain: v.optional(v.string()), // Terrain description from WalkHighlands
+      startGridRef: v.optional(v.string()), // OS Grid Reference (e.g., "NG342359")
+      parkingInfo: v.optional(v.string()), // Parking and access information
+      publicTransport: v.optional(v.string()), // Bus/train access info
+      bogFactor: v.optional(v.number()), // 1-5 rating of bog/mud conditions
+      detailedDescription: v.optional(v.string()), // Longer description with more detail
+      sourceUrl: v.optional(v.string()), // Original WalkHighlands URL for reference
     }).index("bySlug", ["slug"])
       .index("byRegion", ["regionId"])
       .index("byDifficulty", ["difficulty"])
@@ -61,7 +69,29 @@ export default defineSchema({
       .index("byPopularity", ["viewCount"])
       .index("byRating", ["averageRating"])
       .index("byLocation", ["latitude", "longitude"])
-      .index("byPublished", ["isPublished", "publishedAt"]),
+      .index("byPublished", ["isPublished", "publishedAt"])
+      .index("byTerrain", ["terrain"])
+      .index("byBogFactor", ["bogFactor"]),
+
+    walk_stages: defineTable({
+      walkId: v.id("walks"),
+      stageNumber: v.number(), // 1, 2, 3, etc.
+      title: v.optional(v.string()), // Optional stage title (e.g., "Parking to Trailhead")
+      description: v.string(), // Detailed stage directions
+      distance: v.optional(v.number()), // Distance for this stage in km (if available)
+      duration: v.optional(v.number()), // Estimated time for this stage in minutes
+      elevation: v.optional(v.number()), // Elevation gain/loss for this stage
+      imageUrl: v.optional(v.string()), // Optional image for this stage
+      gpsCoordinates: v.optional(v.object({
+        lat: v.number(),
+        lng: v.number()
+      })), // GPS coordinates for this stage waypoint
+      terrain: v.optional(v.string()), // Specific terrain for this stage
+      landmarks: v.optional(v.array(v.string())), // Key landmarks/features in this stage
+      warnings: v.optional(v.array(v.string())), // Safety warnings for this stage
+      createdAt: v.number(),
+    }).index("byWalk", ["walkId"])
+      .index("byWalkAndStage", ["walkId", "stageNumber"]),
 
     walk_reports: defineTable({
       walkId: v.id("walks"),

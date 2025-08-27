@@ -3,7 +3,6 @@ import FeaturesOne from "./features-one";
 import Testimonials from "./testimonials";
 import CallToAction from "./call-to-action";
 import FAQs from "./faqs";
-import Footer from "./footer";
 import CustomClerkPricing from "@/components/custom-clerk-pricing";
 import FeaturedWalks from "./featured-walks";
 import RegionShowcase from "./region-showcase";
@@ -27,7 +26,6 @@ export default function Home() {
       <Testimonials />
       <CallToAction />
       <FAQs />
-      <Footer />
     </div>
   );
 }

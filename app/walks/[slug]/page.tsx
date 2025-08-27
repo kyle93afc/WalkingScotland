@@ -5,8 +5,9 @@ interface Params {
   slug: string;
 }
 
-export default function WalkPage({ params }: { params: Params }) {
-  return <WalkDetailPage slug={params.slug} />;
+export default function WalkPage({ params }: { params: Promise<Params> }) {
+  const { slug } = React.use(params);
+  return <WalkDetailPage slug={slug} />;
 }
 
 // This would be used for static generation in production

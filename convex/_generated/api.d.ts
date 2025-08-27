@@ -19,10 +19,11 @@ import type * as likes from "../likes.js";
 import type * as paymentAttemptTypes from "../paymentAttemptTypes.js";
 import type * as paymentAttempts from "../paymentAttempts.js";
 import type * as regions from "../regions.js";
-import type * as seed_new from "../seed-new.js";
 import type * as seed from "../seed.js";
+import type * as seed_new from "../seed_new.js";
 import type * as users from "../users.js";
 import type * as walkReports from "../walkReports.js";
+import type * as walkStages from "../walkStages.js";
 import type * as walks from "../walks.js";
 
 /**
@@ -40,10 +41,11 @@ declare const fullApi: ApiFromModules<{
   paymentAttemptTypes: typeof paymentAttemptTypes;
   paymentAttempts: typeof paymentAttempts;
   regions: typeof regions;
-  "seed-new": typeof seed_new;
   seed: typeof seed;
+  seed_new: typeof seed_new;
   users: typeof users;
   walkReports: typeof walkReports;
+  walkStages: typeof walkStages;
   walks: typeof walks;
 }>;
 export declare const api: FilterApi<

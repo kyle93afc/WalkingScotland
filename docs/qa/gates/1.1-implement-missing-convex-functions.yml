@@ -1,0 +1,57 @@
+schema: 1
+story: "1.1"
+story_title: "Implement Missing Convex Backend Functions"
+gate: CONCERNS
+status_reason: "Functions exist and work but several TypeScript build issues found and partially resolved during review"
+reviewer: "Quinn (Test Architect)"
+updated: "2025-08-27T21:15:00Z"
+
+waiver: { active: false }
+
+top_issues:
+  - id: "BUILD-001"
+    severity: medium
+    finding: "TypeScript build errors in WalkDiscovery component (rating field mismatch and type safety issues)"
+    suggested_action: "Fixed property name from 'rating' to 'averageRating' and added type annotations"
+  - id: "BUILD-002"  
+    severity: medium
+    finding: "TypeScript errors in WalkMap component for Mapbox TerrainControl (premium feature type missing)"
+    suggested_action: "Added type assertions for optional premium features"
+  - id: "BUILD-003"
+    severity: medium
+    finding: "TypeScript build still failing on boundary-data.ts with coordinate type mismatches"
+    suggested_action: "Needs proper GeoJSON coordinate typing - requires dev attention"
+
+evidence:
+  tests_reviewed: 0
+  risks_identified: 3
+  trace:
+    ac_covered: [1, 2, 3, 4, 5]  # All ACs covered - functions already existed
+    ac_gaps: []  # No coverage gaps
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "Functions include proper authentication checks and data validation"
+  performance:
+    status: PASS
+    notes: "Functions use proper database indexes (byWalk) for efficient queries"
+  reliability:
+    status: PASS
+    notes: "Functions include error handling and null checks"
+  maintainability:
+    status: CONCERNS
+    notes: "Build issues need resolution for maintainable codebase"
+
+recommendations:
+  immediate:
+    - action: "Fix remaining TypeScript build errors in boundary-data.ts"
+      refs: ["lib/boundary-data.ts:157"]
+  future:
+    - action: "Add unit tests for the Convex functions to ensure regression testing"
+      refs: ["convex/walkStages.ts", "convex/walkReports.ts"]
+    - action: "Consider adding integration tests for UI component connections"
+      refs: ["app/walks/WalkDiscovery.tsx"]
+
+quality_score: 70  # 100 - (10*3 CONCERNS) = 70
+expires: "2025-09-10T00:00:00Z"

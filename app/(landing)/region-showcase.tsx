@@ -7,62 +7,94 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, Mountain, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import ScotlandRegionMap from '@/components/map/ScotlandRegionMap';
 
-// Mock data - will be replaced with Convex queries
-const regions = [
-  {
-    id: '1',
-    name: 'Scottish Highlands',
-    slug: 'highlands',
-    description: 'Rugged mountains, pristine lochs, and dramatic glens. Home to Ben Nevis and the Cairngorms.',
-    walkCount: 847,
-    popularityScore: 95,
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-    highlights: ['Ben Nevis', 'Cairngorms', 'Glen Coe', 'Skye Munros'],
-    difficulty: 'All levels',
-    featured: true
-  },
-  {
-    id: '2',
-    name: 'Scottish Islands',
-    slug: 'islands',
-    description: 'Dramatic coastlines, ancient geology, and unique island culture across Skye, Mull, and beyond.',
-    walkCount: 284,
-    popularityScore: 88,
-    imageUrl: 'https://images.unsplash.com/photo-1573160103600-4c2b8c2b49c9?w=800&h=600&fit=crop',
-    highlights: ['Old Man of Storr', 'Quiraing', 'Fingals Cave', 'Callanish'],
-    difficulty: 'Easy to Hard',
-    featured: true
-  },
-  {
-    id: '3',
-    name: 'Southern Uplands',
-    slug: 'southern-uplands',
-    description: 'Rolling hills, ancient forests, and peaceful valleys perfect for all skill levels.',
-    walkCount: 186,
-    popularityScore: 72,
-    imageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop',
-    highlights: ['Merrick', 'Lowther Hills', 'Galloway Forest', 'Borders'],
-    difficulty: 'Easy to Moderate',
-    featured: false
-  },
-  {
-    id: '4',
-    name: 'Central Belt',
-    slug: 'central-belt',
-    description: 'Accessible walks near Scotland\'s major cities, including the Trossachs and Pentland Hills.',
-    walkCount: 321,
-    popularityScore: 79,
-    imageUrl: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&h=600&fit=crop',
-    highlights: ['Loch Lomond', 'Trossachs', 'Pentlands', 'Ochil Hills'],
-    difficulty: 'Easy to Moderate',
-    featured: false
+// Helper function to get highlight tags for a region based on its name
+function getRegionHighlights(regionName: string): string[] {
+  const name = regionName.toLowerCase();
+  
+  if (name.includes('skye')) return ['Old Man of Storr', 'Quiraing', 'Cuillin Ridge', 'Dunvegan'];
+  if (name.includes('mull')) return ['Ben More', 'Tobermory', 'Fingals Cave', 'Duart Castle'];
+  if (name.includes('fort william')) return ['Ben Nevis', 'Glen Coe', 'Glen Nevis', 'Steall Falls'];
+  if (name.includes('cairngorms')) return ['Cairn Gorm', 'Loch Morlich', 'Aviemore', 'Braemar'];
+  if (name.includes('torridon')) return ['Liathach', 'Beinn Alligin', 'Beinn Eighe', 'Applecross'];
+  if (name.includes('loch lomond')) return ['Ben Lomond', 'Trossachs', 'Luss', 'Balloch'];
+  if (name.includes('arran')) return ['Goat Fell', 'Brodick', 'Corrie', 'Lochranza'];
+  if (name.includes('borders')) return ['Eildon Hills', 'St Abbs Head', 'Melrose', 'Kelso'];
+  if (name.includes('dumfries')) return ['Merrick', 'Galloway Forest', 'Wanlockhead', 'Castle Douglas'];
+  if (name.includes('edinburgh')) return ['Arthur\'s Seat', 'Pentland Hills', 'Holyrood Park', 'Calton Hill'];
+  
+  // Default highlights based on region type
+  if (name.includes('isle') || name.includes('island') || name.includes('hebrides') || name.includes('orkney') || name.includes('shetland')) {
+    return ['Coastal walks', 'Sea cliffs', 'Wildlife', 'Culture'];
   }
-];
+  
+  return ['Mountain walks', 'Scenic views', 'Wildlife', 'Heritage'];
+}
+
+// Helper function to get difficulty level for a region
+function getRegionDifficulty(regionName: string): string {
+  const name = regionName.toLowerCase();
+  
+  if (name.includes('sutherland') || name.includes('torridon') || name.includes('skye') || name.includes('fort william')) {
+    return 'Moderate to Hard';
+  }
+  if (name.includes('borders') || name.includes('fife') || name.includes('edinburgh') || name.includes('glasgow')) {
+    return 'Easy to Moderate';
+  }
+  
+  return 'All levels';
+}
 
 export default function RegionShowcase() {
-  const featuredRegions = regions.filter(region => region.featured);
-  const otherRegions = regions.filter(region => !region.featured);
+  const regions = useQuery(api.regions.getAllRegions) || [];
+  
+  // Transform Convex regions to match the expected format and add featured status
+  const transformedRegions = regions.map(region => ({
+    ...region,
+    id: region._id,
+    highlights: getRegionHighlights(region.name),
+    difficulty: getRegionDifficulty(region.name),
+    featured: region.popularityScore >= 85 // Mark high-popularity regions as featured
+  }));
+
+  const featuredRegions = transformedRegions.filter(region => region.featured);
+  const otherRegions = transformedRegions.filter(region => !region.featured);
+
+  // Show loading state
+  if (regions === undefined) {
+    return (
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center">
+            <Mountain className="size-12 text-emerald-600 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Loading regions...</h2>
+            <p className="text-muted-foreground">Discovering Scotland's walking regions</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Show empty state if no regions
+  if (regions.length === 0) {
+    return (
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center">
+            <Mountain className="size-12 text-gray-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No regions available</h2>
+            <p className="text-muted-foreground mb-6">Regions haven't been seeded yet. Set up the database to see Scottish walking regions.</p>
+            <Button asChild>
+              <Link href="/admin/seed">Seed Database</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-24">
@@ -82,6 +114,28 @@ export default function RegionShowcase() {
             From the dramatic peaks of the Highlands to the gentle hills of the Borders, 
             discover Scotland's diverse walking regions.
           </p>
+        </div>
+
+        {/* Interactive Map Section */}
+        <div className="mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              Explore Scotland Interactively
+            </h3>
+            <p className="text-muted-foreground">
+              Click on any region to discover walking routes and plan your next adventure
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden shadow-2xl">
+            <ScotlandRegionMap 
+              regions={transformedRegions}
+              onRegionClick={(region) => {
+                window.location.href = `/regions/${region.slug}`;
+              }}
+              height="600px"
+              className="w-full"
+            />
+          </div>
         </div>
 
         {/* Featured regions - large cards */}
