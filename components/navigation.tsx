@@ -15,9 +15,7 @@ import { dark } from '@clerk/themes'
 import { useTheme } from "next-themes"
 
 const navigationItems = [
-  { name: 'Walks', href: '/walks', icon: Mountain, description: 'Discover walking routes' },
-  { name: 'Regions', href: '/regions', icon: MapPin, description: 'Explore Scottish regions' },
-  { name: 'Discover', href: '/#discover', icon: Compass, description: 'Find new adventures' },
+  { name: 'Regions', href: '/regions', icon: Mountain, description: 'Explore Scottish regions' },
   { name: 'About', href: '/#about', icon: Info, description: 'Learn more about us' },
 ]
 

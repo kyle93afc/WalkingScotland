@@ -249,3 +249,132 @@ export const updateReportCommentCount = mutation({
     });
   },
 });
+
+// Log walk completion with automatic statistics updates
+export const logWalkCompletion = mutation({
+  args: {
+    walkId: v.id("walks"),
+    title: v.string(),
+    content: v.string(),
+    rating: v.number(),
+    completedAt: v.number(),
+    weatherConditions: v.optional(v.string()),
+    trailConditions: v.optional(v.string()),
+    difficulty: v.optional(v.union(v.literal("Easy"), v.literal("Moderate"), v.literal("Hard"), v.literal("Strenuous"))),
+    actualTime: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    // Get user from database
+    const user = await ctx.db
+      .query("users")
+      .withIndex("byExternalId", (q) => q.eq("externalId", identity.subject))
+      .first();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Get walk details for statistics
+    const walk = await ctx.db.get(args.walkId);
+    if (!walk) {
+      throw new Error("Walk not found");
+    }
+
+    // Check for duplicate completion (prevent multiple completions of same walk)
+    const existingReport = await ctx.db
+      .query("walk_reports")
+      .withIndex("byWalk", (q) => q.eq("walkId", args.walkId))
+      .filter((q) => q.eq(q.field("authorId"), user._id))
+      .first();
+
+    if (existingReport) {
+      throw new Error("You have already logged a completion for this walk");
+    }
+
+    // Validate rating
+    if (args.rating < 1 || args.rating > 5) {
+      throw new Error("Rating must be between 1 and 5");
+    }
+
+    // Create the walk report (auto-published for completion logs)
+    const reportId = await ctx.db.insert("walk_reports", {
+      walkId: args.walkId,
+      authorId: user._id,
+      title: args.title,
+      content: args.content,
+      rating: args.rating,
+      completedAt: args.completedAt,
+      weatherConditions: args.weatherConditions,
+      trailConditions: args.trailConditions,
+      difficulty: args.difficulty,
+      actualTime: args.actualTime,
+      isPublished: true, // Auto-publish completion logs
+      publishedAt: Date.now(),
+      likeCount: 0,
+      commentCount: 0,
+    });
+
+    // Update user statistics
+    let userStats = await ctx.db
+      .query("user_stats")
+      .withIndex("byUser", (q) => q.eq("userId", user._id))
+      .first();
+
+    if (!userStats) {
+      // Create initial stats record
+      const statsId = await ctx.db.insert("user_stats", {
+        userId: user._id,
+        totalWalks: 0,
+        totalDistance: 0,
+        totalAscent: 0,
+        totalTime: 0,
+        munrosClimbed: 0,
+        corbettsClimbed: 0,
+        donaldsClimbed: 0,
+        reportsWritten: 0,
+        photosUploaded: 0,
+        lastWalkDate: args.completedAt,
+        achievementBadges: [],
+      });
+      userStats = await ctx.db.get(statsId);
+    } else {
+      // Update existing stats
+      await ctx.db.patch(userStats._id, {
+        totalWalks: userStats.totalWalks + 1,
+        totalDistance: userStats.totalDistance + walk.distance,
+        totalAscent: userStats.totalAscent + walk.ascent,
+        totalTime: userStats.totalTime + (args.actualTime || walk.estimatedTime),
+        reportsWritten: userStats.reportsWritten + 1,
+        lastWalkDate: args.completedAt,
+        // TODO: Add Scottish mountain classification logic
+        // munrosClimbed: userStats.munrosClimbed + (walk.maxElevation > 914 ? 1 : 0), // 3000ft = 914m
+        // corbettsClimbed: userStats.corbettsClimbed + (walk.maxElevation > 762 && walk.maxElevation <= 914 ? 1 : 0),
+        // donaldsClimbed: userStats.donaldsClimbed + (isInLowlands && walk.maxElevation > 610 ? 1 : 0),
+      });
+    }
+
+    // Update walk's report count and average rating
+    const allReports = await ctx.db
+      .query("walk_reports")
+      .withIndex("byWalk", (q) => q.eq("walkId", args.walkId))
+      .filter((q) => q.eq(q.field("isPublished"), true))
+      .collect();
+
+    if (allReports.length > 0) {
+      const totalRating = allReports.reduce((sum, r) => sum + r.rating, 0);
+      const averageRating = totalRating / allReports.length;
+
+      await ctx.db.patch(args.walkId, {
+        reportCount: allReports.length,
+        averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal place
+      });
+    }
+
+    return reportId;
+  },
+});

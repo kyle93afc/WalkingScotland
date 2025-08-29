@@ -1,6 +1,10 @@
 import { mutation } from "./_generated/server";
 import { v } from "convex/values";
 
+// TODO(human): Choose image replacement strategy for broken Unsplash URLs
+// The broken image ID "photo-1573160103600-4c2b8c2b49c9" appears 30+ times
+// Options: 1) Use diverse Scottish landscape images, 2) Use placeholder service, 3) Use local assets
+
 // Seed the database with initial regions
 export const seedRegions = mutation({
   handler: async (ctx) => {

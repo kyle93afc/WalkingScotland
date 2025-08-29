@@ -21,6 +21,7 @@ import type * as paymentAttempts from "../paymentAttempts.js";
 import type * as regions from "../regions.js";
 import type * as seed from "../seed.js";
 import type * as seed_new from "../seed_new.js";
+import type * as userStats from "../userStats.js";
 import type * as users from "../users.js";
 import type * as walkReports from "../walkReports.js";
 import type * as walkStages from "../walkStages.js";
@@ -43,6 +44,7 @@ declare const fullApi: ApiFromModules<{
   regions: typeof regions;
   seed: typeof seed;
   seed_new: typeof seed_new;
+  userStats: typeof userStats;
   users: typeof users;
   walkReports: typeof walkReports;
   walkStages: typeof walkStages;

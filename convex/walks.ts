@@ -259,6 +259,44 @@ export const incrementViewCount = mutation({
   },
 });
 
+// Get featured walks (high popularity, ratings, and recent activity)
+export const getFeaturedWalks = query({
+  args: {
+    limit: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    // Get all published walks with good ratings and high activity
+    const walks = await ctx.db
+      .query("walks")
+      .withIndex("byPublished", (q) => q.eq("isPublished", true))
+      .collect();
+
+    // Filter and sort by featured criteria (rating >= 4.0, view count >= 10)
+    const featuredWalks = walks
+      .filter(walk => walk.averageRating >= 4.0 || walk.viewCount >= 10)
+      .sort((a, b) => {
+        // Score based on rating (40%), view count (40%), and report count (20%)
+        const scoreA = (a.averageRating * 0.4) + (Math.log(a.viewCount + 1) * 0.4) + (a.reportCount * 0.2);
+        const scoreB = (b.averageRating * 0.4) + (Math.log(b.viewCount + 1) * 0.4) + (b.reportCount * 0.2);
+        return scoreB - scoreA;
+      })
+      .slice(0, args.limit ?? 6);
+
+    // Get region info for each walk
+    const walksWithRegion = await Promise.all(
+      featuredWalks.map(async (walk) => {
+        const region = await ctx.db.get(walk.regionId);
+        return {
+          ...walk,
+          region,
+        };
+      })
+    );
+
+    return walksWithRegion;
+  },
+});
+
 // Update walk rating
 export const updateWalkRating = mutation({
   args: { 

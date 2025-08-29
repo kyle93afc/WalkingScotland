@@ -1,0 +1,70 @@
+To create hover effects for each region in Scotland using Mapbox, you can use the feature state and event handling pattern demonstrated in the Mapbox GL JS hover effect example. Here’s how you can adapt this approach for your regions:
+
+1. **Prepare your GeoJSON**: Make sure you have a GeoJSON file with polygons for each region in Scotland.
+
+2. **Add the GeoJSON as a source**: Load your regions GeoJSON as a source in your Mapbox map.
+
+3. **Add a fill layer**: Add a fill layer to visualize the regions.
+
+4. **Use feature state for hover**: Use the `feature-state` expression in your layer’s paint properties to change the appearance (e.g., opacity or color) when a region is hovered.
+
+5. **Handle mouse events**: Use `mousemove` and `mouseleave` events to set and unset the hover state for each region.
+
+Here’s a code example based on the official Mapbox documentation:
+
+```javascript
+map.on('load', () => {
+    map.addSource('scotland-regions', {
+        'type': 'geojson',
+        'data': 'URL_TO_YOUR_SCOTLAND_REGIONS_GEOJSON'
+    });
+
+    map.addLayer({
+        'id': 'region-fills',
+        'type': 'fill',
+        'source': 'scotland-regions',
+        'layout': {},
+        'paint': {
+            'fill-color': '#627BC1',
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,
+                0.5
+            ]
+        }
+    });
+
+    let hoveredRegionId = null;
+
+    map.on('mousemove', 'region-fills', (e) => {
+        if (e.features.length > 0) {
+            if (hoveredRegionId !== null) {
+                map.setFeatureState(
+                    { source: 'scotland-regions', id: hoveredRegionId },
+                    { hover: false }
+                );
+            }
+            hoveredRegionId = e.features[0].id;
+            map.setFeatureState(
+                { source: 'scotland-regions', id: hoveredRegionId },
+                { hover: true }
+            );
+        }
+    });
+
+    map.on('mouseleave', 'region-fills', () => {
+        if (hoveredRegionId !== null) {
+            map.setFeatureState(
+                { source: 'scotland-regions', id: hoveredRegionId },
+                { hover: false }
+            );
+        }
+        hoveredRegionId = null;
+    });
+});
+```
+
+Replace `'URL_TO_YOUR_SCOTLAND_REGIONS_GEOJSON'` with the actual URL or path to your GeoJSON file. This will give each region a hover effect, increasing its opacity when hovered.
+
+For more details and a working example, see the official Mapbox hover effect documentation: [Create a hover effect](https://docs.mapbox.com/mapbox-gl-js/example/hover-styles/)<source>https://docs.mapbox.com/mapbox-gl-js/example/hover-styles/</source>.

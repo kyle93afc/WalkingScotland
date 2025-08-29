@@ -29,82 +29,11 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import WalkMap from '@/components/map/WalkMap';
-import { useQuery } from 'convex/react';
+import { useQuery, useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { WalkCompletionDialog } from '@/components/walks/WalkCompletionDialog';
 
-// Mock data - will be replaced with real Convex queries
-const mockWalk = {
-  _id: '1',
-  title: 'Ben Nevis via Tourist Path',
-  slug: 'ben-nevis-tourist-path',
-  description: `Ben Nevis, the highest mountain in Scotland and the whole of the UK, stands at 1,345 metres (4,413 feet) above sea level. This challenging but rewarding walk takes you via the well-maintained Tourist Path (also known as the Pony Track) to the summit.
-
-The route starts from the Glen Nevis Visitor Centre and follows a zigzag path up the western slopes of the mountain. The initial section is relatively gentle, but the gradient increases significantly as you gain height. The path is well-marked but can be challenging in poor weather conditions.
-
-From the summit, on a clear day, you'll be rewarded with spectacular panoramic views across the Scottish Highlands, including views to the Isle of Skye and the surrounding peaks. The summit plateau features the ruins of the old weather observatory and a trig point marking the highest point in Britain.
-
-This is a serious mountain walk that requires proper preparation, suitable clothing, and navigation skills. Weather conditions can change rapidly, and the summit is often shrouded in cloud even when it's clear at the base.`,
-  shortDescription: 'Scotland\'s highest mountain offering spectacular views from the summit.',
-  region: { _id: '1', name: 'Highlands', slug: 'highlands' },
-  difficulty: 'Strenuous' as const,
-  distance: 17.2,
-  ascent: 1352,
-  estimatedTime: 8,
-  maxElevation: 1345,
-  routeType: 'Out and Back' as const,
-  latitude: 56.7969,
-  longitude: -5.0036,
-  featuredImageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=1200&h=800&fit=crop',
-  tags: ['munro', 'iconic', 'challenging', 'summit'],
-  isPublished: true,
-  publishedAt: Date.now() - 86400000, // 1 day ago
-  viewCount: 15234,
-  likeCount: 428,
-  reportCount: 84,
-  averageRating: 4.7,
-  author: {
-    _id: 'author1',
-    name: 'Highland Walker',
-    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-  }
-};
-
-const mockReports = [
-  {
-    _id: 'report1',
-    title: 'Fantastic conditions on Ben Nevis',
-    content: 'Amazing clear day with views for miles. Started at 7am and reached summit at 11:30am. Trail was busy but manageable. Definitely worth the early start!',
-    rating: 5,
-    completedAt: Date.now() - 172800000, // 2 days ago
-    actualTime: 7.5,
-    weatherConditions: 'Clear and sunny',
-    trailConditions: 'Good - some loose rocks near summit',
-    likeCount: 12,
-    commentCount: 3,
-    author: {
-      _id: 'user1',
-      name: 'Sarah MacLeod',
-      imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616b6d29469?w=150&h=150&fit=crop&crop=face',
-    }
-  },
-  {
-    _id: 'report2', 
-    title: 'Challenging but rewarding climb',
-    content: 'Very tough climb, especially the final push to summit. Weather turned misty halfway up but cleared at the top. Take plenty of water and snacks!',
-    rating: 4,
-    completedAt: Date.now() - 259200000, // 3 days ago
-    actualTime: 9,
-    weatherConditions: 'Misty with clearance',
-    trailConditions: 'Muddy in places',
-    likeCount: 8,
-    commentCount: 1,
-    author: {
-      _id: 'user2',
-      name: 'James Campbell',
-      imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-    }
-  }
-];
+// Component now uses real Convex data exclusively
 
 const difficultyColors = {
   'Easy': 'bg-emerald-100 text-emerald-700 border-emerald-200',
@@ -119,7 +48,10 @@ interface WalkDetailPageProps {
 
 export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
   const [activeTab, setActiveTab] = useState('overview');
-  const [liked, setLiked] = useState(false);
+
+  // Real-time mutations for walk interactions
+  const incrementViewCount = useMutation(api.walks.incrementViewCount);
+  const toggleLike = useMutation(api.likes.toggleLike);
 
   // Get real data from Convex
   const walk = useQuery(api.walks.getWalkBySlug, { slug });
@@ -130,8 +62,21 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
     walk ? { walkId: walk._id, limit: 10 } : "skip"
   );
   
-  // Use mock reports as fallback if no real reports exist
-  const displayReports = reports && reports.length > 0 ? reports : mockReports;
+  // Check if user has liked this walk (real-time)
+  const userLike = useQuery(api.likes.getUserLike, 
+    walk ? { targetId: walk._id, targetType: "walk" } : "skip"
+  );
+
+  // Track view when walk loads (real-time update)
+  React.useEffect(() => {
+    if (walk?._id) {
+      // Increment view count in real-time
+      incrementViewCount({ walkId: walk._id });
+    }
+  }, [walk?._id, incrementViewCount]);
+  
+  // Use real reports data - no fallback to mock data
+  const displayReports = reports || [];
 
   // Show loading state while data is being fetched
   if (walk === undefined) {
@@ -166,9 +111,10 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
     );
   }
 
-  const handleLike = () => {
-    setLiked(!liked);
-    // In real app: await toggleLike({ targetId: walk._id, targetType: 'walk' });
+  const handleLike = async () => {
+    if (!walk?._id) return;
+    // Real-time like toggle with immediate UI update
+    await toggleLike({ targetId: walk._id, targetType: 'walk' });
   };
 
   const handleShare = () => {
@@ -226,8 +172,8 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
               </div>
               <div className="flex items-center gap-1">
                 <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                <span>{walk.averageRating}</span>
-                <span className="text-gray-300">({walk.reportCount} reviews)</span>
+                <span>{displayReports.length > 0 ? walk.averageRating : 'No ratings yet'}</span>
+                <span className="text-gray-300">({displayReports.length} reviews)</span>
               </div>
             </div>
           </div>
@@ -236,8 +182,8 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
         {/* Action buttons */}
         <div className="absolute top-6 right-6 flex gap-2">
           <Button size="sm" variant="secondary" className="bg-white/20 text-white border-white/20 backdrop-blur-sm hover:bg-white/30" onClick={handleLike}>
-            <Heart className={`size-4 ${liked ? 'fill-red-500 text-red-500' : ''}`} />
-            {walk.likeCount + (liked ? 1 : 0)}
+            <Heart className={`size-4 ${userLike ? 'fill-red-500 text-red-500' : ''}`} />
+            {walk.likeCount}
           </Button>
           <Button size="sm" variant="secondary" className="bg-white/20 text-white border-white/20 backdrop-blur-sm hover:bg-white/30" onClick={handleShare}>
             <Share2 className="size-4" />
@@ -255,7 +201,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="map">Map</TabsTrigger>
                 <TabsTrigger value="reports">
-                  Reports ({reports && reports.length > 0 ? reports.length : walk.reportCount})
+                  Reports ({displayReports.length})
                 </TabsTrigger>
                 <TabsTrigger value="photos">Photos</TabsTrigger>
               </TabsList>
@@ -308,7 +254,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                           <Mountain className="size-6 text-purple-600" />
                         </div>
                         <div className="text-2xl font-bold">{walk.maxElevation}m</div>
-                        <div className="text-sm text-muted-foreference">Max Elevation</div>
+                        <div className="text-sm text-muted-foreground">Max Elevation</div>
                       </div>
                     </div>
                   </CardContent>
@@ -473,9 +419,16 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                     <Download className="size-4 mr-2" />
                     Download GPX
                   </Button>
-                  <Button className="w-full" variant="outline" size="lg">
-                    Write a Report
-                  </Button>
+                  <WalkCompletionDialog
+                    walkId={walk._id}
+                    walkTitle={walk.title}
+                    estimatedTime={walk.estimatedTime}
+                    difficulty={walk.difficulty}
+                  >
+                    <Button className="w-full" variant="outline" size="lg">
+                      Log Completion
+                    </Button>
+                  </WalkCompletionDialog>
                   <Button className="w-full" variant="outline" size="lg">
                     Add to Wishlist
                   </Button>
@@ -499,7 +452,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Reports</span>
-                  <span className="font-medium">{walk.reportCount}</span>
+                  <span className="font-medium">{displayReports.length}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Added</span>

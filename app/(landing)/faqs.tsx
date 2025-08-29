@@ -8,35 +8,35 @@ export default function FAQs() {
                             Frequently <br className="hidden lg:block" /> Asked <br className="hidden lg:block" />
                             Questions
                         </h2>
-                        <p>Accusantium quisquam. Illo, omnis?</p>
+                        <p>Everything you need to know about walking in Scotland</p>
                     </div>
 
                     <div className="divide-y divide-dashed sm:mx-auto sm:max-w-lg lg:mx-0">
                         <div className="pb-6">
-                            <h3 className="font-medium">What is the refund policy?</h3>
-                            <p className="text-muted-foreground mt-4">We offer a 30-day money back guarantee. If you are not satisfied with our product, you can request a refund within 30 days of your purchase.</p>
+                            <h3 className="font-medium">Is Walking Scotland free to use?</h3>
+                            <p className="text-muted-foreground mt-4">Yes! Walking Scotland is completely free to use. Access all our Scottish walking routes, detailed information, and community features at no cost.</p>
 
                             <ol className="list-outside list-decimal space-y-2 pl-4">
-                                <li className="text-muted-foreground mt-4">To request a refund, please contact our support team with your order number and reason for the refund.</li>
-                                <li className="text-muted-foreground mt-4">Refunds will be processed within 3-5 business days.</li>
-                                <li className="text-muted-foreground mt-4">Please note that refunds are only available for new customers and are limited to one per customer.</li>
+                                <li className="text-muted-foreground mt-4">Browse over 90 detailed Scottish walking routes without any subscription</li>
+                                <li className="text-muted-foreground mt-4">Track your personal walking statistics and achievements</li>
+                                <li className="text-muted-foreground mt-4">Share walk reports and experiences with the community</li>
                             </ol>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">How do I cancel my subscription?</h3>
-                            <p className="text-muted-foreground mt-4">You can cancel your subscription at any time by logging into your account and clicking on the cancel button.</p>
+                            <h3 className="font-medium">Do I need special equipment for Scottish walks?</h3>
+                            <p className="text-muted-foreground mt-4">Equipment needs vary by walk difficulty and weather. Always check weather conditions and carry appropriate gear for Scottish highlands.</p>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Can I upgrade my plan?</h3>
-                            <p className="text-muted-foreground my-4">Yes, you can upgrade your plan at any time by logging into your account and selecting the plan you want to upgrade to.</p>
+                            <h3 className="font-medium">How accurate are the walk descriptions?</h3>
+                            <p className="text-muted-foreground my-4">Our walk data is sourced from WalkHighlands and regularly updated. We provide detailed route information, difficulty ratings, and current conditions.</p>
                             <ul className="list-outside list-disc space-y-2 pl-4">
-                                <li className="text-muted-foreground">You will be charged the difference in price between your current plan and the plan you are upgrading to.</li>
-                                <li className="text-muted-foreground">Your new plan will take effect immediately and you will be billed at the new rate on your next billing cycle.</li>
+                                <li className="text-muted-foreground">GPS coordinates and mapping data for precise navigation</li>
+                                <li className="text-muted-foreground">Real-time updates from the walking community</li>
                             </ul>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Do you offer phone support?</h3>
-                            <p className="text-muted-foreground mt-4">We do not offer phone support at this time. However, you can contact us via email or live chat for any questions or concerns you may have.</p>
+                            <h3 className="font-medium">Can I contribute walk reports and photos?</h3>
+                            <p className="text-muted-foreground mt-4">Absolutely! Create an account to share your walking experiences, upload photos, and help other walkers with route conditions and tips.</p>
                         </div>
                     </div>
                 </div>

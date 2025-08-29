@@ -1,123 +1,157 @@
-import React from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { MapPin, Mountain, Users } from 'lucide-react'
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
+import { Mountain, Users, Compass } from 'lucide-react';
+
+interface LiveActivity {
+  id: string;
+  location: string;
+  count: number;
+  activity: string;
+  status: string;
+}
 
 export default function HeroSection() {
-    return (
-        <main>
-                <section className="relative overflow-hidden">
-                    {/* Background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-blue-50 dark:from-emerald-950 dark:via-gray-900 dark:to-blue-950"></div>
-                    
-                    <div className="py-20 md:py-36 relative z-10">
-                        <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-                            <div>
-                                <Link
-                                    href="/walks"
-                                    className="hover:bg-emerald-100 dark:hover:bg-emerald-900/20 mx-auto flex w-fit items-center justify-center gap-2 rounded-full py-2 px-4 transition-colors duration-150 border border-emerald-200 dark:border-emerald-800">
-                                    <Mountain className="size-4 text-emerald-600 dark:text-emerald-400" />
-                                    <span className="font-medium text-emerald-700 dark:text-emerald-300">Discover Scotland's Best Walks</span>
-                                </Link>
-                                
-                                <h1 className="mx-auto mt-8 max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
-                                    Scotland's Mountains
-                                    <br />
-                                    <span className="text-gray-900 dark:text-white">Made Simple</span>
-                                </h1>
-                                
-                                <p className="text-muted-foreground mx-auto my-6 max-w-2xl text-balance text-xl">
-                                    Discover breathtaking walks across the Highlands, Islands, and Lowlands. 
-                                    Interactive maps, real-time conditions, and a vibrant hiking community.
-                                </p>
+  const [liveActivities] = useState<LiveActivity[]>([
+    { id: '1', location: 'Ben Nevis', count: 12, activity: 'climbers', status: 'Perfect conditions' },
+    { id: '2', location: 'Cairngorms', count: 8, activity: 'walkers', status: 'Light snow' },
+    { id: '3', location: 'Skye Cuillin', count: 5, activity: 'scramblers', status: 'Clear views' },
+    { id: '4', location: 'Loch Lomond', count: 15, activity: 'hikers', status: 'Sunny spells' }
+  ]);
 
-                                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
-                                    <Button
-                                        asChild
-                                        size="lg"
-                                        className="bg-emerald-600 hover:bg-emerald-700 text-white min-w-[180px]">
-                                        <Link href="/walks">
-                                            <MapPin className="size-4 mr-2" />
-                                            <span className="text-nowrap">Explore Walks</span>
-                                        </Link>
-                                    </Button>
-                                    <Button
-                                        asChild
-                                        size="lg"
-                                        variant="outline"
-                                        className="min-w-[180px] border-emerald-200 text-emerald-700 hover:bg-emerald-50 dark:border-emerald-800 dark:text-emerald-300">
-                                        <Link href="/regions">
-                                            <Mountain className="size-4 mr-2" />
-                                            <span className="text-nowrap">Browse Regions</span>
-                                        </Link>
-                                    </Button>
-                                </div>
+  const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
 
-                                {/* Stats */}
-                                <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-                                    <div className="text-center">
-                                        <div className="text-2xl md:text-3xl font-bold text-emerald-600">2,000+</div>
-                                        <div className="text-sm text-muted-foreground">Documented Walks</div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="text-2xl md:text-3xl font-bold text-blue-600">50K+</div>
-                                        <div className="text-sm text-muted-foreground">Active Hikers</div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="text-2xl md:text-3xl font-bold text-purple-600">Live</div>
-                                        <div className="text-sm text-muted-foreground">Trail Conditions</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentActivityIndex((prev) => (prev + 1) % liveActivities.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [liveActivities.length]);
 
-                        {/* Hero Image/Map Preview */}
-                        <div className="relative mt-16">
-                            <div className="relative z-10 mx-auto max-w-6xl px-6">
-                                <div className="relative mx-auto overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 shadow-2xl shadow-black/10 bg-white dark:bg-gray-900">
-                                    {/* Placeholder for hero image - you'll want to add a beautiful Scottish landscape or map screenshot */}
-                                    <div className="aspect-[16/10] bg-gradient-to-br from-emerald-100 via-blue-100 to-purple-100 dark:from-emerald-900 dark:via-blue-900 dark:to-purple-900 flex items-center justify-center">
-                                        <div className="text-center">
-                                            <Mountain className="size-16 mx-auto text-emerald-600 mb-4" />
-                                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Interactive Maps</h3>
-                                            <p className="text-gray-600 dark:text-gray-400">3D terrain, real-time weather, and live trail conditions</p>
-                                        </div>
-                                    </div>
-                                </div>
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background with Scottish mountain imagery */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('/images/hero/hero-scottish-landscape.png')`,
+        }}
+      />
+      
+      {/* Clean overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/20" />
 
-                                {/* Floating cards */}
-                                <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 hidden lg:block">
-                                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-200 dark:border-gray-700 max-w-xs">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900 rounded-full flex items-center justify-center">
-                                                <Users className="size-5 text-emerald-600" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium">5 hikers on Ben Nevis</div>
-                                                <div className="text-xs text-muted-foreground">Live now</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left side - Hero content */}
+          <div className="text-white space-y-8">
+            <div className="space-y-4">
+              <Badge variant="secondary" className="bg-emerald-600/20 text-emerald-100 border-emerald-400/30 mb-4">
+                <Mountain className="w-4 h-4 mr-2" />
+                282 Munros • Unlimited Adventures
+              </Badge>
+              
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                Discover Scotland's
+                <span className="block text-emerald-400">Highland Majesty</span>
+              </h1>
+              
+              <p className="text-xl lg:text-2xl text-slate-200 max-w-2xl">
+                From ancient Munros to rugged Corbetts, explore Scotland's most spectacular walking routes with 
+                real-time bog factor ratings, Gaelic place names, and Highland safety alerts.
+              </p>
+              
+              <p className="text-sm text-slate-300 italic">
+                &quot;Fàilte gu Alba&quot; - Welcome to Scotland
+              </p>
+            </div>
 
-                                <div className="absolute -right-4 top-1/4 transform -translate-y-1/2 hidden lg:block">
-                                    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-200 dark:border-gray-700 max-w-xs">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                                                <MapPin className="size-5 text-blue-600" />
-                                            </div>
-                                            <div>
-                                                <div className="text-sm font-medium">Clear conditions</div>
-                                                <div className="text-xs text-muted-foreground">Cairngorms NP</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold" asChild>
+                <Link href="/regions">
+                  <Compass className="w-5 h-5 mr-2" />
+                  Explore Scotland's Regions
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold" asChild>
+                <Link href="/regions">
+                  Find Your Perfect Walk
+                </Link>
+              </Button>
+            </div>
+
+            {/* Scottish walking stats */}
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-emerald-400">282</div>
+                <div className="text-sm text-slate-300">Munros</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-purple-400">219</div>
+                <div className="text-sm text-slate-300">Corbetts</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-amber-400">50+</div>
+                <div className="text-sm text-slate-300">Islands</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side - Interactive elements */}
+          <div className="relative">
+            {/* Animated Scotland Map Placeholder */}
+            <div className="relative bg-slate-800/50 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+              <div className="aspect-[4/5] bg-gradient-to-b from-emerald-500/20 to-purple-500/20 rounded-xl flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/10 to-purple-400/10" />
+                <div className="text-center text-white z-10">
+                  <Mountain className="w-16 h-16 mx-auto mb-4 text-emerald-400" />
+                  <p className="text-lg font-semibold">Interactive Scotland Map</p>
+                  <p className="text-sm text-slate-300 mt-2">Click to explore regions</p>
+                </div>
+                
+                {/* Floating activity pins */}
+                <div className="absolute top-6 left-6 animate-pulse">
+                  <div className="w-3 h-3 bg-emerald-400 rounded-full"></div>
+                </div>
+                <div className="absolute top-1/3 right-8 animate-pulse delay-1000">
+                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                </div>
+                <div className="absolute bottom-1/3 left-1/3 animate-pulse delay-2000">
+                  <div className="w-3 h-3 bg-amber-400 rounded-full"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Activity Cards */}
+            <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 space-y-4 hidden lg:block">
+              {liveActivities.map((activity, index) => (
+                <Card 
+                  key={activity.id}
+                  className={`p-4 bg-white/95 backdrop-blur-sm transition-all duration-500 ${
+                    index === currentActivityIndex ? 'scale-105 shadow-lg' : 'scale-95 opacity-75'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Users className="w-4 h-4 text-emerald-600" />
+                      <span className="font-bold text-emerald-600">{activity.count}</span>
                     </div>
-                </section>
-        </main>
-    )
+                    <div className="flex-1">
+                      <div className="font-semibold text-slate-800">{activity.activity}</div>
+                      <div className="text-sm text-slate-600">{activity.location}</div>
+                      <div className="text-xs text-emerald-600">{activity.status}</div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

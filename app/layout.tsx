@@ -21,9 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Walking Scotland - Discover Scottish Walking Routes",
-  description: "Explore Scotland's most beautiful walking routes, from Highland peaks to peaceful island trails. Your comprehensive guide to Scottish outdoor adventures.",
-  keywords: "Scotland walking, Scottish hikes, Highland walks, Scottish islands, outdoor Scotland, walking routes Scotland",
+  title: "Walking Scotland - Scottish Walking Routes, Munros & Hiking Guide",
+  description: "Discover Scotland's best walking routes with interactive maps, live weather updates, and detailed trail guides. From Munros to coastal walks, explore Highland peaks, Scottish islands, and lowland trails safely.",
+  keywords: "Scotland walking routes, Scottish Munros, Highland walks, Corbetts, Scottish hiking, Ben Nevis, Cairngorms, Isle of Skye walks, West Highland Way, Scottish trails, walking Scotland, Scottish islands walking, bog factor, Scottish outdoor adventures",
 };
 
 export default function RootLayout({

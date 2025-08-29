@@ -74,24 +74,7 @@ const sortOptions = [
   { value: 'recent', label: 'Recently Added' },
 ];
 
-// Mock data - replace with real Convex queries
-const mockWalks = [
-  {
-    _id: '1',
-    title: 'Ben Nevis via Tourist Path',
-    slug: 'ben-nevis-tourist-path',
-    region: { name: 'Highlands' },
-    difficulty: 'Strenuous' as const,
-    distance: 17.2,
-    estimatedTime: 8,
-    rating: 4.7,
-    reviewCount: 284,
-    featuredImageUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop',
-    shortDescription: 'Scotland\'s highest mountain offering spectacular views.',
-    tags: ['munro', 'challenging', 'iconic'],
-    viewCount: 15234,
-  }
-];
+// Removed mock data - now using real Convex queries
 
 interface WalkSearchProps {
   onResultsChange?: (results: any[]) => void;
@@ -113,11 +96,15 @@ export default function WalkSearch({
     ...initialFilters,
   });
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [searchResults, setSearchResults] = useState(mockWalks);
 
-  // Simulate search with mock data
+  // Get walks from Convex
+  const walks = useQuery(api.walks.getPublishedWalks, { limit: 100 });
+
+  // Filter and search walks
   const filteredResults = useMemo(() => {
-    let results = mockWalks.filter(walk => {
+    if (!walks) return [];
+    
+    let results = walks.filter(walk => {
       // Search term filter
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
@@ -125,7 +112,7 @@ export default function WalkSearch({
           walk.title.toLowerCase().includes(searchLower) ||
           walk.shortDescription.toLowerCase().includes(searchLower) ||
           walk.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
-          walk.region.name.toLowerCase().includes(searchLower);
+          (walk.region?.name && walk.region.name.toLowerCase().includes(searchLower));
         
         if (!matchesSearch) return false;
       }
@@ -160,7 +147,7 @@ export default function WalkSearch({
         case 'popularity':
           return b.viewCount - a.viewCount;
         case 'rating':
-          return b.rating - a.rating;
+          return b.averageRating - a.averageRating;
         case 'distance':
           return a.distance - b.distance;
         case 'difficulty':
@@ -172,10 +159,10 @@ export default function WalkSearch({
     });
 
     return results;
-  }, [filters]);
+  }, [walks, filters]);
 
+  // Call onResultsChange when results update
   useEffect(() => {
-    setSearchResults(filteredResults);
     onResultsChange?.(filteredResults);
   }, [filteredResults, onResultsChange]);
 
@@ -237,7 +224,7 @@ export default function WalkSearch({
 
         {/* Results count */}
         <div className="text-sm text-muted-foreground">
-          {searchResults.length} walk{searchResults.length !== 1 ? 's' : ''} found
+          {filteredResults.length} walk{filteredResults.length !== 1 ? 's' : ''} found
         </div>
       </div>
     );
@@ -417,12 +404,12 @@ export default function WalkSearch({
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">
-            {searchResults.length} walk{searchResults.length !== 1 ? 's' : ''} found
+            {filteredResults.length} walk{filteredResults.length !== 1 ? 's' : ''} found
           </h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {searchResults.map((walk) => (
+          {filteredResults.map((walk) => (
             <Card key={walk._id} className="group hover:shadow-lg transition-shadow overflow-hidden">
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
@@ -445,7 +432,7 @@ export default function WalkSearch({
                 
                 <div className="flex items-center gap-1 mb-2 text-sm text-muted-foreground">
                   <MapPin className="size-3" />
-                  <span>{walk.region.name}</span>
+                  <span>{walk.region?.name || 'Unknown Region'}</span>
                 </div>
                 
                 <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
@@ -466,8 +453,8 @@ export default function WalkSearch({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Star className="size-4 fill-yellow-400 text-yellow-400" />
-                    <span className="font-medium text-sm">{walk.rating}</span>
-                    <span className="text-xs text-muted-foreground">({walk.reviewCount})</span>
+                    <span className="font-medium text-sm">{walk.averageRating}</span>
+                    <span className="text-xs text-muted-foreground">({walk.reportCount || 0})</span>
                   </div>
                   
                   <div className="flex gap-1">
@@ -483,7 +470,7 @@ export default function WalkSearch({
           ))}
         </div>
 
-        {searchResults.length === 0 && (
+        {filteredResults.length === 0 && walks && (
           <div className="text-center py-12">
             <Mountain className="size-12 text-gray-400 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">

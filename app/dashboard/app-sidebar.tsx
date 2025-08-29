@@ -2,24 +2,13 @@
 
 import * as React from "react"
 import {
-  IconCamera,
   IconChartBar,
   IconDashboard,
   IconDatabase,
-  IconMessageCircle,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
   IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
-  IconSparkles,
-  IconBrandOpenai,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/app/dashboard/nav-documents"
@@ -46,44 +35,39 @@ const data = {
       url: "/dashboard",
       icon: IconDashboard,
     },
-    {
-      title: "Payment gated",
-      url: "/dashboard/payment-gated",
-      icon: IconSparkles,
-    },
   ],
   navSecondary: [
     {
-      title: "Settings",
+      title: "Walk Settings",
       url: "#",
       icon: IconSettings,
     },
     {
-      title: "Get Help",
+      title: "Walking Help",
       url: "#",
       icon: IconHelp,
     },
     {
-      title: "Search",
-      url: "#",
+      title: "Find Walks",
+      url: "/walks",
       icon: IconSearch,
     },
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
+      name: "My Walks",
+      url: "/dashboard/my-walks",
       icon: IconDatabase,
     },
     {
-      name: "Reports",
+      name: "Walk Reports",
       url: "#",
       icon: IconReport,
     },
     {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
+      name: "Achievements",
+      url: "/dashboard/achievements",
+      icon: IconChartBar,
     },
   ],
 }
@@ -100,8 +84,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <Link href="/">
                 <ChatMaxingIconColoured className="!size-6" />
-                <span className="text-base font-semibold">Starter DIY</span>
-                <Badge variant="outline" className="text-muted-foreground  text-xs">Demo</Badge>
+                <span className="text-base font-semibold">Walking Scotland</span>
+                <Badge variant="outline" className="text-muted-foreground  text-xs">Beta</Badge>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

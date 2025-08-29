@@ -17,7 +17,6 @@ import { useTheme } from "next-themes"
 
 const menuItems = [
     { name: 'Walks', href: '/walks' },
-    { name: 'Regions', href: '/regions' },
     { name: 'Discover', href: '/#discover' },
     { name: 'About', href: '/#about' },
 ]

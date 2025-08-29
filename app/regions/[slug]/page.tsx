@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, MapPin, Mountain, Clock, TrendingUp, Star } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ArrowLeft, MapPin, Mountain, Clock, TrendingUp, Star, Search, Filter } from 'lucide-react';
 import Image from 'next/image';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
@@ -24,6 +25,60 @@ export default function RegionPage({ params }: RegionPageProps) {
     api.walks.getWalksByRegion,
     region ? { regionId: region._id } : "skip"
   );
+
+  // Filter and search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
+  const [selectedDistance, setSelectedDistance] = useState('all');
+  const [selectedTime, setSelectedTime] = useState('all');
+  const [sortBy, setSortBy] = useState('popularity');
+
+  // Filter and sort walks
+  const filteredWalks = useMemo(() => {
+    if (!regionWalks) return [];
+    
+    const filtered = regionWalks.filter(walk => {
+      const matchesSearch = !searchTerm || 
+        walk.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        walk.shortDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        walk.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      const matchesDifficulty = selectedDifficulty === 'all' || walk.difficulty === selectedDifficulty;
+      
+      const matchesDistance = selectedDistance === 'all' || 
+        (selectedDistance === 'short' && walk.distance <= 10) ||
+        (selectedDistance === 'medium' && walk.distance > 10 && walk.distance <= 20) ||
+        (selectedDistance === 'long' && walk.distance > 20);
+      
+      const matchesTime = selectedTime === 'all' ||
+        (selectedTime === 'quick' && walk.estimatedTime <= 3) ||
+        (selectedTime === 'half-day' && walk.estimatedTime > 3 && walk.estimatedTime <= 6) ||
+        (selectedTime === 'full-day' && walk.estimatedTime > 6);
+
+      return matchesSearch && matchesDifficulty && matchesDistance && matchesTime;
+    });
+
+    // Sort walks
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'popularity':
+          return b.viewCount - a.viewCount;
+        case 'rating':
+          return b.averageRating - a.averageRating;
+        case 'distance':
+          return a.distance - b.distance;
+        case 'difficulty':
+          const difficultyOrder = { 'Easy': 1, 'Moderate': 2, 'Hard': 3, 'Strenuous': 4 };
+          return difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+        case 'name':
+          return a.title.localeCompare(b.title);
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  }, [regionWalks, searchTerm, selectedDifficulty, selectedDistance, selectedTime, sortBy]);
 
   if (region === undefined) {
     return (
@@ -115,20 +170,139 @@ export default function RegionPage({ params }: RegionPageProps) {
           </Card>
         </div>
 
+        {/* Search and Filters */}
+        {regionWalks && regionWalks.length > 0 && (
+          <div className="mb-8">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-2 mb-4">
+                <Filter className="w-5 h-5 text-emerald-600" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  Find Your Perfect Walk
+                </h3>
+              </div>
+              
+              {/* Search */}
+              <div className="mb-4">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    type="text"
+                    placeholder={`Search walks in ${region.name}...`}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
+              {/* Filter Controls */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Difficulty
+                  </label>
+                  <select
+                    value={selectedDifficulty}
+                    onChange={(e) => setSelectedDifficulty(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  >
+                    <option value="all">All Levels</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Strenuous">Strenuous</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Distance
+                  </label>
+                  <select
+                    value={selectedDistance}
+                    onChange={(e) => setSelectedDistance(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  >
+                    <option value="all">Any Distance</option>
+                    <option value="short">Short (≤10km)</option>
+                    <option value="medium">Medium (10-20km)</option>
+                    <option value="long">Long (>20km)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Duration
+                  </label>
+                  <select
+                    value={selectedTime}
+                    onChange={(e) => setSelectedTime(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  >
+                    <option value="all">Any Duration</option>
+                    <option value="quick">Quick (≤3h)</option>
+                    <option value="half-day">Half Day (3-6h)</option>
+                    <option value="full-day">Full Day (>6h)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Sort By
+                  </label>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 dark:border-gray-600 rounded-md text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  >
+                    <option value="popularity">Most Popular</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="distance">Shortest First</option>
+                    <option value="difficulty">Easiest First</option>
+                    <option value="name">Alphabetical</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Results summary */}
+              <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                <span>
+                  {filteredWalks.length} of {regionWalks.length} walks match your criteria
+                </span>
+                {(searchTerm || selectedDifficulty !== 'all' || selectedDistance !== 'all' || selectedTime !== 'all') && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setSearchTerm('');
+                      setSelectedDifficulty('all');
+                      setSelectedDistance('all');
+                      setSelectedTime('all');
+                    }}
+                    className="text-emerald-600 hover:text-emerald-700"
+                  >
+                    Clear Filters
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Walks in Region */}
-        {regionWalks && regionWalks.length > 0 ? (
+        {filteredWalks && filteredWalks.length > 0 ? (
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
                 Walks in {region.name}
               </h2>
               <Badge variant="secondary">
-                {regionWalks.length} walks
+                {filteredWalks.length} walks
               </Badge>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regionWalks.map((walk) => (
+              {filteredWalks.map((walk) => (
                 <Link href={`/walks/${walk.slug}`} key={walk._id}>
                   <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
                     <div className="aspect-[4/3] overflow-hidden">
@@ -196,6 +370,26 @@ export default function RegionPage({ params }: RegionPageProps) {
               ))}
             </div>
           </div>
+        ) : regionWalks && regionWalks.length > 0 ? (
+          <Card className="p-8 text-center">
+            <Search className="size-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+              No walks match your criteria
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              Try adjusting your filters to find walks in {region.name}.
+            </p>
+            <Button
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedDifficulty('all');
+                setSelectedDistance('all');
+                setSelectedTime('all');
+              }}
+            >
+              Clear All Filters
+            </Button>
+          </Card>
         ) : (
           <Card className="p-8 text-center">
             <Mountain className="size-12 text-gray-400 mx-auto mb-4" />
@@ -203,10 +397,10 @@ export default function RegionPage({ params }: RegionPageProps) {
               No walks available yet
             </h3>
             <p className="text-muted-foreground mb-4">
-              Walks for this region haven't been added yet. Check back later for updates.
+              Walks for {region.name} haven't been added yet. Check back later for updates.
             </p>
             <Button asChild>
-              <Link href="/walks">Browse All Walks</Link>
+              <Link href="/regions">Browse Other Regions</Link>
             </Button>
           </Card>
         )}
@@ -222,10 +416,10 @@ export default function RegionPage({ params }: RegionPageProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
-                <Link href="/walks">Browse All Walks</Link>
+                <Link href="/regions">Explore Other Regions</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/regions">Explore Other Regions</Link>
+                <Link href="/">Back to Home</Link>
               </Button>
             </div>
           </CardContent>

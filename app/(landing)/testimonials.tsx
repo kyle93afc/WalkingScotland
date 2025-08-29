@@ -10,40 +10,40 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
     {
-        name: 'Jonathan Yombo',
-        role: 'Software Engineer',
-        image: 'https://randomuser.me/api/portraits/men/1.jpg',
-        quote: 'Tailus is really extraordinary and very practical, no need to break your head. A real gold mine.',
+        name: 'Sarah MacLeod',
+        role: 'Highland Walker & Munro Bagger',
+        image: 'https://randomuser.me/api/portraits/women/1.jpg',
+        quote: 'Walking Scotland transformed my hill walking experience. The bog factor ratings and detailed route descriptions helped me tackle Ben Nevis safely even in challenging conditions.',
     },
     {
-        name: 'Yves Kalume',
-        role: 'GDE - Android',
+        name: 'James Stewart',
+        role: 'Isle of Skye Guide',
         image: 'https://randomuser.me/api/portraits/men/6.jpg',
-        quote: 'With no experience in webdesign I just redesigned my entire website in a few minutes with tailwindcss thanks to Tailus.',
+        quote: 'As a professional guide, I rely on accurate trail information. The real-time weather updates and community reports have been invaluable for planning safe routes across the Cuillin Ridge.',
     },
     {
-        name: 'Yucel Faruksahan',
-        role: 'Tailkits Creator',
-        image: 'https://randomuser.me/api/portraits/men/7.jpg',
-        quote: 'Great work on tailfolio template. This is one of the best personal website that I have seen so far :)',
+        name: 'Fiona Campbell',
+        role: 'Cairngorms Explorer',
+        image: 'https://randomuser.me/api/portraits/women/7.jpg',
+        quote: 'The interactive maps showing exact waypoints made navigating the Lairig Ghru pass so much easier. Finally found a platform that understands Scottish terrain challenges!',
     },
     {
-        name: 'Shekinah Tshiokufila',
-        role: 'Senior Software Engineer',
+        name: 'Robert Burns',
+        role: 'Southern Uplands Enthusiast',
         image: 'https://randomuser.me/api/portraits/men/4.jpg',
-        quote: 'Tailus is redefining the standard of web design, with these blocks it provides an easy and efficient way for those who love beauty but may lack the time to implement it. I can only recommend this incredible wonder.',
+        quote: 'I\'ve completed over 200 Marilyns using Walking Scotland. The difficulty ratings are spot-on, and being able to track my progress through the different peak categories keeps me motivated.',
     },
     {
-        name: 'Oketa Fred',
-        role: 'Fullstack Developer',
-        image: 'https://randomuser.me/api/portraits/men/2.jpg',
-        quote: 'I absolutely love Tailus! The component blocks are beautifully designed and easy to use, which makes creating a great-looking website a breeze.',
+        name: 'Morag Henderson',
+        role: 'West Highland Way Veteran',
+        image: 'https://randomuser.me/api/portraits/women/2.jpg',
+        quote: 'The community aspect is brilliant. Reading other walkers\' reports about conditions on the Devil\'s Staircase helped me choose the perfect day for my traverse.',
     },
     {
-        name: 'Yves Kalume',
-        role: 'GDE - Android',
-        image: 'https://randomuser.me/api/portraits/men/6.jpg',
-        quote: 'With no experience in webdesign I just redesigned my entire website in a few minutes with tailwindcss thanks to Tailus.',
+        name: 'Calum MacDonald',
+        role: 'Hebridean Island Hopper',
+        image: 'https://randomuser.me/api/portraits/men/8.jpg',
+        quote: 'Finally, a platform that covers the Scottish Islands properly! The coastal walk descriptions for Harris and Lewis are incredibly detailed, and the tide information is essential.',
     },
 ]
 
@@ -63,8 +63,8 @@ export default function WallOfLoveSection() {
             <div className="py-16 md:py-32">
                 <div className="mx-auto max-w-6xl px-6">
                     <div className="text-center">
-                        <h2 className="text-foreground text-4xl font-semibold">Loved by the Community</h2>
-                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Harum quae dolore orrupti aut temporibus ariatur.</p>
+                        <h2 className="text-foreground text-4xl font-semibold">Trusted by Scottish Walkers</h2>
+                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Join thousands of walkers who rely on Walking Scotland to discover, plan, and share their Scottish adventures safely.</p>
                     </div>
                     <div className="mt-8 grid gap-3 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
                         {testimonialChunks.map((chunk, chunkIndex) => (
