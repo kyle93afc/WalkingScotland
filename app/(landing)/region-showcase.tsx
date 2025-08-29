@@ -87,8 +87,6 @@ export default function RegionShowcase() {
     }
   }, [transformedRegions, selectedRegion]);
 
-  const featuredRegions = transformedRegions.filter(region => region.featured);
-  const otherRegions = transformedRegions.filter(region => !region.featured);
 
   // Show loading state
   if (regions === undefined) {
@@ -98,7 +96,7 @@ export default function RegionShowcase() {
           <div className="text-center">
             <Mountain className="w-12 h-12 text-emerald-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-slate-900 mb-2">Loading regions...</h2>
-            <p className="text-slate-600">Discovering Scotland's walking regions</p>
+            <p className="text-slate-600">Discovering Scotland&apos;s walking regions</p>
           </div>
         </div>
       </section>
@@ -113,7 +111,7 @@ export default function RegionShowcase() {
           <div className="text-center">
             <Mountain className="w-12 h-12 text-gray-400 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-slate-900 mb-2">No regions available</h2>
-            <p className="text-slate-600 mb-6">Regions haven't been seeded yet. Set up the database to see Scottish walking regions.</p>
+            <p className="text-slate-600 mb-6">Regions haven&apos;t been seeded yet. Set up the database to see Scottish walking regions.</p>
             <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
               <Link href="/admin/seed">Seed Database</Link>
             </Button>
@@ -130,7 +128,7 @@ export default function RegionShowcase() {
         <div className="text-center mb-16">
           <Badge variant="secondary" className="bg-emerald-100 text-emerald-800 border-emerald-200 mb-4">
             <MapPin className="w-4 h-4 mr-2" />
-            Explore Scotland's Regions
+            Explore Scotland&apos;s Regions
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
             From Highlands to

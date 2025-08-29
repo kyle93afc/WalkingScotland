@@ -226,7 +226,7 @@ export default function RegionPage({ params }: RegionPageProps) {
                     <option value="all">Any Distance</option>
                     <option value="short">Short (≤10km)</option>
                     <option value="medium">Medium (10-20km)</option>
-                    <option value="long">Long (>20km)</option>
+                    <option value="long">Long (&gt;20km)</option>
                   </select>
                 </div>
 
@@ -242,7 +242,7 @@ export default function RegionPage({ params }: RegionPageProps) {
                     <option value="all">Any Duration</option>
                     <option value="quick">Quick (≤3h)</option>
                     <option value="half-day">Half Day (3-6h)</option>
-                    <option value="full-day">Full Day (>6h)</option>
+                    <option value="full-day">Full Day (&gt;6h)</option>
                   </select>
                 </div>
 

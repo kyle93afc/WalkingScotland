@@ -56,12 +56,12 @@ export default function HeroSection() {
               </Badge>
               
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                Discover Scotland's
+                Discover Scotland&apos;s
                 <span className="block text-emerald-400">Highland Majesty</span>
               </h1>
               
               <p className="text-xl lg:text-2xl text-slate-200 max-w-2xl">
-                From ancient Munros to rugged Corbetts, explore Scotland's most spectacular walking routes with 
+                From ancient Munros to rugged Corbetts, explore Scotland&apos;s most spectacular walking routes with 
                 real-time bog factor ratings, Gaelic place names, and Highland safety alerts.
               </p>
               
@@ -74,7 +74,7 @@ export default function HeroSection() {
               <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg font-semibold" asChild>
                 <Link href="/regions">
                   <Compass className="w-5 h-5 mr-2" />
-                  Explore Scotland's Regions
+                  Explore Scotland&apos;s Regions
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold" asChild>

@@ -102,7 +102,7 @@ export default function WalkDetailPage({ slug }: WalkDetailPageProps) {
         <div className="text-center">
           <Mountain className="size-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Walk not found</h3>
-          <p className="text-muted-foreground">The walk you're looking for doesn't exist.</p>
+          <p className="text-muted-foreground">The walk you&apos;re looking for doesn&apos;t exist.</p>
           <Button asChild className="mt-4">
             <Link href="/walks">Browse Walks</Link>
           </Button>

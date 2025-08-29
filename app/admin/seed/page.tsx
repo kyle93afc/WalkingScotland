@@ -8,6 +8,7 @@ import { Loader2, Database, CheckCircle, AlertCircle, Play } from 'lucide-react'
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { useAuth } from '@clerk/nextjs';
+import Link from 'next/link';
 
 export default function SeedPage() {
   const [isSeeding, setIsSeeding] = useState(false);
@@ -579,7 +580,7 @@ export default function SeedPage() {
             </div>
 
             <p className="text-sm text-muted-foreground">
-              After seeding, you can visit the <a href="/walks" className="text-emerald-600 hover:underline">walks page</a> to see all the sample data.
+              After seeding, you can visit the <Link href="/walks" className="text-emerald-600 hover:underline">walks page</Link> to see all the sample data.
             </p>
           </CardContent>
         </Card>

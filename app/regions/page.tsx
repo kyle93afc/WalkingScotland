@@ -2,8 +2,6 @@
 
 import React, { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
 import ScotlandMapbox from '@/components/map/ScotlandMapbox';
 
 
@@ -19,7 +17,7 @@ export default function RegionsPage() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Explore Scotland's
+            Explore Scotland&apos;s
             <span className="block text-emerald-600">Walking Regions</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

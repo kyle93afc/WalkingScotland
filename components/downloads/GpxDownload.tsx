@@ -87,7 +87,7 @@ export default function GpxDownload({ walkTitle, gpxStorageId, className = '' }:
             No GPX Track Available
           </h3>
           <p className="text-muted-foreground mb-4">
-            This walk doesn't have a GPS track file yet. 
+            This walk doesn&apos;t have a GPS track file yet. 
           </p>
           <Button variant="outline" size="sm">
             Upload GPX File
